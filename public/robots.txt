@@ -1,0 +1,7 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Host & Sitemap
+Host: https://swapnilpatil.dev
+Sitemap: https://swapnilpatil.dev/sitemap.xml

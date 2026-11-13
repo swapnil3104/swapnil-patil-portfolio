@@ -1,0 +1,21 @@
+{
+  "name": "Swapnil Patil — AI/ML Engineer & Product Designer",
+  "short_name": "Swapnil Patil",
+  "description": "Portfolio of Swapnil Patil — Computer Science Engineer, AI/ML specialist, Python developer, and UI/UX product designer.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0A0A0B",
+  "theme_color": "#0A0A0B",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "name": "Swapnil Patil Portfolio",
+  "description": "Professional engineering portfolio of Swapnil Patil — AI/ML Engineer, Computer Vision Developer & Product Designer",
+  "url": "https://swapnilpatil.dev",
+  "author": {
+    "name": "Swapnil Patil",
+    "role": "AI/ML Engineer & Product Designer",
+    "email": "swapnilpatil.dev@gmail.com",
+    "github": "https://github.com/swapnil3104",
+    "linkedin": "https://linkedin.com/in/swapnil-patil-3104"
+  },
+  "capabilities": [
+    "Machine Learning & Deep Learning",
+    "Computer Vision (OpenCV, MediaPipe, YOLOv8)",
+    "Full-Stack Web Engineering (React, TypeScript, FastAPI)",
+    "UI/UX Design Systems (Figma)"
+  ],
+  "resources": {
+    "llms_text": "/llms.txt",
+    "resume": "/Swapnil_Patil_Resume1.pdf",
+    "github": "https://github.com/swapnil3104"
+  },
+  "endpoints": {
+    "contact": "#contact",
+    "work": "#work",
+    "consultant": "#consultant",
+    "ui_ux": "#ui-ux",
+    "services": "#services",
+    "about": "#about",
+    "lab": "#lab"
+  }
+}
+

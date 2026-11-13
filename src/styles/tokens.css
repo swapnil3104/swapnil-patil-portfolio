@@ -1,0 +1,31 @@
+:root {
+  /* Soren Hale Reference Color Tokens (https://wild-hours-611915.framer.app/) */
+  --sh-bone: #0c0e0d;        /* Base matte obsidian canvas */
+  --sh-bone-deep: #080a09;   /* Deepest contrast background */
+  --sh-ink: #f2f4f3;         /* Primary crisp bone white */
+  --sh-brass: #c6ff00;       /* Electric neon chartreuse / cyber lime accent */
+  --sh-brass-alt: #d4ff00;   /* Secondary neon chartreuse */
+  --sh-brass-glow: rgba(198, 255, 0, 0.20);
+  --sh-stone: #8a928f;       /* Muted slate grey */
+  --sh-fog: #828c87;         /* High-contrast monospace keys / borders (WCAG AA pass) */
+  --sh-night: #000000;       /* High-contrast pure black */
+
+  /* Dynamic Hairline Borders */
+  --sh-hair: rgba(242, 244, 243, 0.12);
+  --sh-hair2: rgba(242, 244, 243, 0.22);
+  --sh-hair-brass: rgba(198, 255, 0, 0.35);
+
+  /* Card Surfaces & Glassmorphism */
+  --sh-card: rgba(18, 22, 20, 0.75);
+  --sh-elevated: #131715;
+
+  /* Typography Stacks */
+  --font-display: 'Bricolage Grotesque', sans-serif;
+  --font-body: 'Geist', 'Inter', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* Layout */
+  --container-max-width: 1280px;
+  --header-height-initial: 88px;
+  --header-height-contracted: 72px;
+}

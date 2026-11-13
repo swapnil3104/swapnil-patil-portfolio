@@ -1,0 +1,39 @@
+# Swapnil Patil — AI/ML Engineer & Product Designer
+
+> Portfolio, systems architecture, open-source AI models, commercial deployments, and contact info for LLM and agentic crawlers.
+
+## Identity & Background
+- Name: Swapnil Patil
+- Role: AI/ML Engineer, Computer Vision Developer & Product Designer
+- Education: Bachelor of Technology (B.Tech) in Computer Science & Engineering, ADCET (8.80 SGPA)
+- Location: Pune, Maharashtra, India (UTC+05:30)
+- GitHub: https://github.com/swapnil3104
+- LinkedIn: https://linkedin.com/in/swapnil-patil-3104
+- Availability: Open for Full-Time AI/ML Engineering roles, Commercial Technical Consulting, and Research Collaborations.
+
+## Core Technical Specializations
+- **Computer Vision & Deep Learning**: Real-time sign language recognition (ISLR), driver distraction & drowsiness monitoring (DrishtiDrive AI), pothole detection (RoadGuard AI), MediaPipe, OpenCV, YOLOv8, PyTorch, TensorFlow.
+- **Full-Stack & Systems**: Python (FastAPI, Flask), TypeScript, React, Next.js, Node.js, WebGL / Three.js, PostgreSQL, Docker, Git.
+- **Product Design & Design Systems**: Figma, Design Tokens, Auto-Layout Systems, Interaction Design, WCAG 2.1 AA Accessibility.
+
+## Featured AI/ML Projects
+1. **ISLR Studio (Indian Sign Language Recognition)**: Real-time hand landmark sequence tracking & translation. 18ms inference budget on CPU.
+   - GitHub: https://github.com/swapnil3104/Indian-Sign-Language-Recognition-Using-Machine-Learning
+2. **DrishtiDrive AI**: Advanced Driver Assistance System (ADAS) with 3D facial landmark estimation, PERCLOS drowsiness tracking (99.4% precision), and edge alert telemetry.
+   - GitHub: https://github.com/swapnil3104/DrishtiDrive-Advanced-Driver-Monitoring-System
+3. **RoadGuard AI**: Automated road infrastructure hazard & pothole detection system using custom trained YOLOv8 with GeoJSON telemetry tagging.
+   - GitHub: https://github.com/swapnil3104/Road-Pothole-Detection-System
+4. **Self-Care AI**: Conversational health assistant powered by fine-tuned BioBERT, providing multi-turn symptom screening and wellness recommendations.
+   - GitHub: https://github.com/swapnil3104/Self-Care-Chatbot-Medical-Assistance-System
+
+## Commercial Client Deployments (11 Deployments)
+- Studio Squanta (Creative Agency Portfolio & CMS)
+- Altecht (Cloud Infrastructure Consultancy Platform)
+- SS Creation (Jewellery Brand Platform & Catalog)
+- Samarth Business Group (Conglomerate Corporate Portal)
+- Other deployments: Shreeshyam Traders, Global Edge, PrintCraft Studios, NextGen Agro, Zenith Logistics, BrightFuture Learning, Apex Solutions.
+
+## Contact
+- Email: swapnilpatil.dev@gmail.com
+- Portfolio URL: https://swapnilpatil.dev
+
