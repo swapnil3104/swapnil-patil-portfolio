@@ -1,7 +1,8 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ProjectGitHub } from '@/types';
 import { GitHubIcon, ExternalLinkIcon, XIcon, CopyIcon, CheckIcon, LayersIcon, CpuIcon, SparklesIcon } from '@/components/icons';
 import { ProjectVisual } from './ProjectVisual';
+import { useModalDialog } from '@/hooks';
 
 interface ProjectModalProps {
   project: ProjectGitHub | null;
@@ -17,35 +18,18 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onC
   const [modalImageError, setModalImageError] = useState(false);
   const [triedModalOnlineFallback, setTriedModalOnlineFallback] = useState(false);
 
+  const { dialogRef } = useModalDialog<HTMLDivElement>({
+    isOpen: isOpen && !!project,
+    onClose,
+  });
+
   useEffect(() => {
     setModalImageError(false);
     setTriedModalOnlineFallback(false);
-  }, [project?.id]);
-
-  // Handle ESC key press
-  const handleKeyDown = useCallback(
-    (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        onClose();
-      }
-    },
-    [onClose]
-  );
-
-  useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = 'hidden';
-      window.addEventListener('keydown', handleKeyDown);
       setActiveTab('overview');
-    } else {
-      document.body.style.overflow = '';
-      window.removeEventListener('keydown', handleKeyDown);
     }
-    return () => {
-      document.body.style.overflow = '';
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [isOpen, handleKeyDown]);
+  }, [project?.id, isOpen]);
 
   if (!isOpen || !project) return null;
 
@@ -77,6 +61,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onC
 
       {/* Modal Dialog Window */}
       <div
+        ref={dialogRef}
         className="relative w-full max-w-4xl max-h-[92vh] flex flex-col bg-[#0f1210] border border-white/15 rounded-2xl shadow-2xl shadow-black/90 overflow-hidden text-typography-body z-10"
         onClick={(e) => e.stopPropagation()}
       >
@@ -100,6 +85,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onC
           </div>
 
           <button
+            type="button"
             onClick={onClose}
             aria-label="Close dialog"
             className="p-2 rounded-full bg-white/[0.06] hover:bg-white/[0.12] text-typography-muted hover:text-white transition-colors"
@@ -114,6 +100,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onC
             <span className="text-accent-emerald">$</span>
             <code className="text-typography-body truncate">{cloneCommand}</code>
             <button
+              type="button"
               onClick={handleCopyClone}
               className="inline-flex items-center gap-1 px-2 py-1 rounded bg-white/[0.06] hover:bg-white/[0.1] text-typography-headline transition-colors"
               title="Copy git clone command"
@@ -168,12 +155,12 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onC
           ].map((tab) => (
             <button
               key={tab.id}
+              type="button"
               onClick={() => setActiveTab(tab.id as TabType)}
-              className={`px-3.5 py-2.5 text-xs font-mono border-b-2 whitespace-nowrap transition-colors ${
-                activeTab === tab.id
+              className={`px-3.5 py-2.5 text-xs font-mono border-b-2 whitespace-nowrap transition-colors ${activeTab === tab.id
                   ? 'border-accent-emerald text-accent-emerald font-semibold bg-accent-emerald/[0.04]'
                   : 'border-transparent text-typography-muted hover:text-typography-headline hover:border-white/20'
-              }`}
+                }`}
             >
               {tab.label}
             </button>
@@ -208,8 +195,8 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onC
                 {(() => {
                   const onlineModalImageUrl = project
                     ? `https://image.pollinations.ai/prompt/${encodeURIComponent(
-                        `${project.title} ${project.category} futuristic artificial intelligence engineering dark interface high tech`
-                      )}?width=1200&height=675&nologo=true`
+                      `${project.title} ${project.category} futuristic artificial intelligence engineering dark interface high tech`
+                    )}?width=1200&height=675&nologo=true`
                     : '';
                   const modalImageSrc = project.image
                     ? (triedModalOnlineFallback ? onlineModalImageUrl : project.image)
@@ -244,6 +231,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onC
                           <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-xs font-mono">
                             <span className="text-[#f2f4f3] font-semibold truncate mr-2">{project.title}</span>
                             <button
+                              type="button"
                               onClick={() => setActiveTab('architecture')}
                               className="text-[#c6ff00] hover:underline flex-shrink-0 text-[11px] font-mono"
                             >
@@ -431,6 +419,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onC
 
           <div className="flex items-center gap-3">
             <button
+              type="button"
               onClick={onClose}
               className="px-4 py-2 rounded-full text-xs font-mono text-typography-muted hover:text-white bg-white/[0.04] hover:bg-white/[0.08] transition-colors"
             >

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { ServiceOffering } from '@/types';
 import {
   XIcon,
@@ -8,6 +8,7 @@ import {
   SparklesIcon,
   ShieldCheckIcon,
 } from '@/components/icons';
+import { useModalDialog } from '@/hooks';
 
 interface ServiceModalProps {
   service: ServiceOffering | null;
@@ -16,29 +17,13 @@ interface ServiceModalProps {
 }
 
 export const ServiceModal: React.FC<ServiceModalProps> = ({ service, isOpen, onClose }) => {
-  const modalRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isOpen) {
-        onClose();
-      }
-    };
-
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-      window.addEventListener('keydown', handleKeyDown);
-      setTimeout(() => {
-        closeButtonRef.current?.focus();
-      }, 50);
-    }
-
-    return () => {
-      document.body.style.overflow = '';
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [isOpen, onClose]);
+  const { dialogRef } = useModalDialog<HTMLDivElement>({
+    isOpen: isOpen && !!service,
+    onClose,
+    initialFocusRef: closeButtonRef,
+  });
 
   if (!isOpen || !service) return null;
 
@@ -53,7 +38,7 @@ export const ServiceModal: React.FC<ServiceModalProps> = ({ service, isOpen, onC
       }}
     >
       <div
-        ref={modalRef}
+        ref={dialogRef}
         className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-xl bg-[#0c0f0d] border border-white/15 shadow-2xl text-typography-body flex flex-col p-6 sm:p-8"
         onClick={(e) => e.stopPropagation()}
       >

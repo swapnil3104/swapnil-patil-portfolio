@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useReducedMotion } from './useReducedMotion';
 
 /**
  * Universal Scroll Reveal Observer
@@ -6,12 +7,17 @@ import { useEffect } from 'react';
  * and adds `.is-revealed` when they scroll into view.
  */
 export function useScrollReveal() {
+  const prefersReducedMotion = useReducedMotion();
+
   useEffect(() => {
-    if (typeof window === 'undefined' || !('IntersectionObserver' in window)) {
-      // Fallback: make everything visible immediately
-      document.querySelectorAll(
-        '.scroll-reveal, [data-reveal], .sh-fade-up, .tech-card, .sh-editorial-card'
-      ).forEach((el) => {
+    if (typeof window === 'undefined') return;
+
+    const revealSelector =
+      '.scroll-reveal, [data-reveal], .sh-fade-up, .tech-card, .sh-editorial-card, [data-stagger]';
+
+    // If reduced motion is requested or IntersectionObserver not supported, reveal all immediately
+    if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+      document.querySelectorAll(revealSelector).forEach((el) => {
         el.classList.add('is-revealed', 'is-visible');
       });
       return;
@@ -28,12 +34,12 @@ export function useScrollReveal() {
               const children = entry.target.children;
               Array.from(children).forEach((child, index) => {
                 const htmlChild = child as HTMLElement;
-                htmlChild.style.transitionDelay = `${index * 85}ms`;
+                htmlChild.style.transitionDelay = `${index * 75}ms`;
                 htmlChild.classList.add('is-revealed', 'is-visible');
               });
             }
 
-            // Once revealed, unobserve to keep DOM performant
+            // Once revealed, unobserve to free resources
             observer.unobserve(entry.target);
           }
         });
@@ -45,9 +51,7 @@ export function useScrollReveal() {
     );
 
     const observeElements = () => {
-      const elements = document.querySelectorAll(
-        '.scroll-reveal, [data-reveal], .sh-fade-up, .tech-card, .sh-editorial-card, [data-stagger]'
-      );
+      const elements = document.querySelectorAll(revealSelector);
       elements.forEach((el) => {
         if (!el.classList.contains('is-revealed')) {
           observer.observe(el);
@@ -57,9 +61,18 @@ export function useScrollReveal() {
 
     observeElements();
 
-    // Re-observe if dynamic content renders
+    // Batched re-observe on DOM changes via RAF to avoid layout thrashing
+    let rafId: number | null = null;
+    let isScheduled = false;
+
     const mutationObserver = new MutationObserver(() => {
-      observeElements();
+      if (!isScheduled) {
+        isScheduled = true;
+        rafId = requestAnimationFrame(() => {
+          observeElements();
+          isScheduled = false;
+        });
+      }
     });
 
     mutationObserver.observe(document.body, { childList: true, subtree: true });
@@ -67,6 +80,9 @@ export function useScrollReveal() {
     return () => {
       observer.disconnect();
       mutationObserver.disconnect();
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+      }
     };
-  }, []);
+  }, [prefersReducedMotion]);
 }

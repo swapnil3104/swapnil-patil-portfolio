@@ -13,9 +13,12 @@ export const GreenCursor: React.FC = () => {
   const [hoverType, setHoverType] = useState<'default' | 'clickable' | 'text'>('default');
   const [ripples, setRipples] = useState<Ripple[]>([]);
 
-  // Positions for smooth spring interpolation
+  // Smooth lerp coordinates
   const mousePos = useRef({ x: -100, y: -100 });
   const ringPos = useRef({ x: -100, y: -100 });
+  const isVisibleRef = useRef(false);
+  const hoverTypeRef = useRef<'default' | 'clickable' | 'text'>('default');
+
   const pointRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
   const animFrameId = useRef<number | null>(null);
@@ -32,7 +35,8 @@ export const GreenCursor: React.FC = () => {
       mousePos.current.x = e.clientX;
       mousePos.current.y = e.clientY;
 
-      if (!isVisible) {
+      if (!isVisibleRef.current) {
+        isVisibleRef.current = true;
         setIsVisible(true);
         ringPos.current.x = e.clientX;
         ringPos.current.y = e.clientY;
@@ -41,17 +45,21 @@ export const GreenCursor: React.FC = () => {
       // Detect hovered element type
       const target = e.target as HTMLElement | null;
       if (target) {
+        const isTextInput = target.closest('input[type="text"], input[type="email"], textarea');
         const isInteractive = target.closest(
           'a, button, input, textarea, select, [role="button"], .clickable, .tech-card, .sh-editorial-card, .interactive'
         );
-        const isTextInput = target.closest('input[type="text"], input[type="email"], textarea');
 
+        let nextHover: 'default' | 'clickable' | 'text' = 'default';
         if (isTextInput) {
-          setHoverType('text');
+          nextHover = 'text';
         } else if (isInteractive) {
-          setHoverType('clickable');
-        } else {
-          setHoverType('default');
+          nextHover = 'clickable';
+        }
+
+        if (hoverTypeRef.current !== nextHover) {
+          hoverTypeRef.current = nextHover;
+          setHoverType(nextHover);
         }
       }
     };
@@ -75,10 +83,12 @@ export const GreenCursor: React.FC = () => {
     };
 
     const handleMouseLeave = () => {
+      isVisibleRef.current = false;
       setIsVisible(false);
     };
 
     const handleMouseEnter = () => {
+      isVisibleRef.current = true;
       setIsVisible(true);
     };
 
@@ -90,16 +100,18 @@ export const GreenCursor: React.FC = () => {
 
     // High performance animation loop for trailing ring
     const renderLoop = () => {
-      // Lerp ring towards mouse position
-      const ease = 0.2;
-      ringPos.current.x += (mousePos.current.x - ringPos.current.x) * ease;
-      ringPos.current.y += (mousePos.current.y - ringPos.current.y) * ease;
+      if (isVisibleRef.current) {
+        // Lerp ring towards mouse position
+        const ease = 0.22;
+        ringPos.current.x += (mousePos.current.x - ringPos.current.x) * ease;
+        ringPos.current.y += (mousePos.current.y - ringPos.current.y) * ease;
 
-      if (pointRef.current) {
-        pointRef.current.style.transform = `translate3d(${mousePos.current.x}px, ${mousePos.current.y}px, 0) translate(-50%, -50%)`;
-      }
-      if (ringRef.current) {
-        ringRef.current.style.transform = `translate3d(${ringPos.current.x}px, ${ringPos.current.y}px, 0) translate(-50%, -50%)`;
+        if (pointRef.current) {
+          pointRef.current.style.transform = `translate3d(${mousePos.current.x}px, ${mousePos.current.y}px, 0) translate(-50%, -50%)`;
+        }
+        if (ringRef.current) {
+          ringRef.current.style.transform = `translate3d(${ringPos.current.x}px, ${ringPos.current.y}px, 0) translate(-50%, -50%)`;
+        }
       }
 
       animFrameId.current = requestAnimationFrame(renderLoop);
@@ -118,7 +130,7 @@ export const GreenCursor: React.FC = () => {
         cancelAnimationFrame(animFrameId.current);
       }
     };
-  }, [isVisible]);
+  }, []);
 
   if (!isEnabled) return null;
 
@@ -132,7 +144,7 @@ export const GreenCursor: React.FC = () => {
       {/* Outer Follower Ring with Dynamic State Interpolation */}
       <div
         ref={ringRef}
-        className={`fixed top-0 left-0 rounded-full transition-all duration-200 ease-out flex items-center justify-center ${
+        className={`fixed top-0 left-0 rounded-full transition-[width,height,border-color,background-color] duration-200 ease-out flex items-center justify-center ${
           hoverType === 'clickable'
             ? 'w-12 h-12 border border-[#c6ff00] bg-[#c6ff00]/10 shadow-[0_0_24px_rgba(198,255,0,0.35)] backdrop-blur-[1px]'
             : hoverType === 'text'
@@ -152,7 +164,7 @@ export const GreenCursor: React.FC = () => {
       {/* Main Laser Green Center Point (Replaces the cursor arrow) */}
       <div
         ref={pointRef}
-        className={`fixed top-0 left-0 rounded-full bg-[#c6ff00] transition-transform duration-75 shadow-[0_0_12px_#c6ff00,0_0_20px_rgba(198,255,0,0.7)] ${
+        className={`fixed top-0 left-0 rounded-full bg-[#c6ff00] transition-[width,height,transform] duration-75 shadow-[0_0_12px_#c6ff00,0_0_20px_rgba(198,255,0,0.7)] ${
           isClicking
             ? 'w-1.5 h-1.5 scale-90'
             : hoverType === 'clickable'
@@ -179,4 +191,3 @@ export const GreenCursor: React.FC = () => {
     </div>
   );
 };
-

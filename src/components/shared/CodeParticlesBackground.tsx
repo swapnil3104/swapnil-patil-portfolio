@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { useReducedMotion } from '@/hooks/useReducedMotion';
 
 interface Particle {
   x: number;
@@ -33,26 +34,42 @@ const CODE_SYMBOLS = [
 
 export const CodeParticlesBackground: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
+    // If user prefers reduced motion, do not animate canvas particles
+    if (prefersReducedMotion) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
     let animationId: number;
-    let width = (canvas.width = window.innerWidth);
-    let height = (canvas.height = window.innerHeight);
+    let isTabVisible = !document.hidden;
 
-    const handleResize = () => {
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    let dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    const setupCanvasSize = () => {
       if (!canvas) return;
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
+      width = window.innerWidth;
+      height = window.innerHeight;
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+      canvas.width = Math.floor(width * dpr);
+      canvas.height = Math.floor(height * dpr);
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+
+      ctx.scale(dpr, dpr);
     };
-    window.addEventListener('resize', handleResize);
+
+    setupCanvasSize();
 
     // Initialize particles based on screen width
-    const particleCount = Math.min(22, Math.floor(width / 65));
+    const particleCount = Math.min(20, Math.floor(width / 70));
     const particles: Particle[] = Array.from({ length: particleCount }).map(() => ({
       x: Math.random() * width,
       y: Math.random() * height,
@@ -71,19 +88,36 @@ export const CodeParticlesBackground: React.FC = () => {
 
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      scrollVelocity = (currentScrollY - lastScrollY) * 0.1;
+      scrollVelocity = (currentScrollY - lastScrollY) * 0.08;
       lastScrollY = currentScrollY;
     };
+
+    const handleResize = () => {
+      setupCanvasSize();
+    };
+
+    const handleVisibilityChange = () => {
+      isTabVisible = !document.hidden;
+      if (isTabVisible) {
+        lastScrollY = window.scrollY;
+        animationId = requestAnimationFrame(render);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
     window.addEventListener('scroll', handleScroll, { passive: true });
+    document.addEventListener('visibilitychange', handleVisibilityChange);
 
     const render = () => {
+      if (!isTabVisible) return;
+
       ctx.clearRect(0, 0, width, height);
 
       // Damp scroll velocity
       scrollVelocity *= 0.92;
 
       particles.forEach((p) => {
-        p.y += p.speedY - scrollVelocity * 0.4;
+        p.y += p.speedY - scrollVelocity * 0.35;
         p.x += p.speedX;
         p.rotation += p.rotSpeed;
 
@@ -115,9 +149,12 @@ export const CodeParticlesBackground: React.FC = () => {
     return () => {
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('scroll', handleScroll);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
       cancelAnimationFrame(animationId);
     };
-  }, []);
+  }, [prefersReducedMotion]);
+
+  if (prefersReducedMotion) return null;
 
   return (
     <canvas
@@ -127,4 +164,3 @@ export const CodeParticlesBackground: React.FC = () => {
     />
   );
 };
-

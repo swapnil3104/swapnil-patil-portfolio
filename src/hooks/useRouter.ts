@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useSyncExternalStore, useCallback } from 'react';
 import { trackPageView } from '@/utils/analytics';
 
 export type RouteType =
@@ -12,6 +12,8 @@ export type RouteType =
   | 'contact';
 
 function getRouteFromLocation(): RouteType {
+  if (typeof window === 'undefined') return 'home';
+
   const path = window.location.pathname.toLowerCase();
   const hash = window.location.hash.toLowerCase();
 
@@ -40,6 +42,8 @@ function getRouteFromLocation(): RouteType {
 }
 
 function updatePageTitle(route: RouteType) {
+  if (typeof document === 'undefined') return;
+
   switch (route) {
     case 'work':
       document.title = 'Work: Engineering Case Studies with Numbers | Swapnil Patil';
@@ -69,31 +73,54 @@ function updatePageTitle(route: RouteType) {
   }
 }
 
+// React 18+ Tearing-Free External Route Store
+type RouteListener = () => void;
+const listeners = new Set<RouteListener>();
+
+function subscribe(callback: RouteListener) {
+  listeners.add(callback);
+  return () => {
+    listeners.delete(callback);
+  };
+}
+
+let cachedRoute: RouteType = typeof window !== 'undefined' ? getRouteFromLocation() : 'home';
+
+function notify() {
+  const nextRoute = getRouteFromLocation();
+  if (nextRoute !== cachedRoute) {
+    cachedRoute = nextRoute;
+    updatePageTitle(cachedRoute);
+    trackPageView();
+  }
+  listeners.forEach((listener) => listener());
+}
+
+if (typeof window !== 'undefined') {
+  window.addEventListener('popstate', notify);
+  window.addEventListener('hashchange', notify);
+  // Initial title setup
+  updatePageTitle(cachedRoute);
+}
+
+function getSnapshot(): RouteType {
+  // Sync if location changed out of band
+  const current = getRouteFromLocation();
+  if (current !== cachedRoute) {
+    cachedRoute = current;
+  }
+  return cachedRoute;
+}
+
+function getServerSnapshot(): RouteType {
+  return 'home';
+}
+
 export function useRouter() {
-  const [currentRoute, setCurrentRoute] = useState<RouteType>(getRouteFromLocation);
-
-  useEffect(() => {
-    const handleLocationChange = () => {
-      const newRoute = getRouteFromLocation();
-      setCurrentRoute(newRoute);
-      trackPageView();
-      updatePageTitle(newRoute);
-    };
-
-    // Initial check
-    handleLocationChange();
-
-    window.addEventListener('popstate', handleLocationChange);
-    window.addEventListener('hashchange', handleLocationChange);
-
-    return () => {
-      window.removeEventListener('popstate', handleLocationChange);
-      window.removeEventListener('hashchange', handleLocationChange);
-    };
-  }, []);
+  const currentRoute = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
   const navigate = useCallback((to: string) => {
-    // If it's an external link or file
+    // External link or download
     if (to.startsWith('http') || to.endsWith('.pdf')) {
       window.open(to, '_blank', 'noopener,noreferrer');
       return;
@@ -112,16 +139,9 @@ export function useRouter() {
       targetPath = '/';
     }
 
-    // Push state
+    // Push state without page reload
     window.history.pushState({}, '', targetPath + targetHash);
-
-    // Broadcast popstate event so all useRouter hook instances across the app (Navbar, App, Footer) update synchronously
-    window.dispatchEvent(new PopStateEvent('popstate'));
-
-    const newRoute = getRouteFromLocation();
-    setCurrentRoute(newRoute);
-    trackPageView();
-    updatePageTitle(newRoute);
+    notify();
 
     if (targetHash) {
       setTimeout(() => {

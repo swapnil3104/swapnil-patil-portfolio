@@ -12,6 +12,7 @@ import {
   SparklesIcon,
 } from '@/components/icons';
 import { DesignVisual } from './DesignVisual';
+import { useModalDialog } from '@/hooks';
 
 interface DesignModalProps {
   design: ProjectUIUX | null;
@@ -22,37 +23,22 @@ interface DesignModalProps {
 type TabType = 'overview' | 'tokens' | 'screens' | 'accessibility';
 
 export const DesignModal: React.FC<DesignModalProps> = ({ design, isOpen, onClose }) => {
-  const modalRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const [activeTab, setActiveTab] = useState<TabType>('overview');
   const [copied, setCopied] = useState(false);
 
-  // Close on Escape key and prevent body scroll when open
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isOpen) {
-        onClose();
-      }
-    };
+  const { dialogRef } = useModalDialog<HTMLDivElement>({
+    isOpen: isOpen && !!design,
+    onClose,
+    initialFocusRef: closeButtonRef,
+  });
 
+  // Reset tab when design changes or opens
+  useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = 'hidden';
-      window.addEventListener('keydown', handleKeyDown);
-      setTimeout(() => {
-        closeButtonRef.current?.focus();
-      }, 50);
+      setActiveTab('overview');
     }
-
-    return () => {
-      document.body.style.overflow = '';
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [isOpen, onClose]);
-
-  // Reset tab when design changes
-  useEffect(() => {
-    setActiveTab('overview');
-  }, [design]);
+  }, [design, isOpen]);
 
   if (!isOpen || !design) return null;
 
@@ -79,7 +65,7 @@ export const DesignModal: React.FC<DesignModalProps> = ({ design, isOpen, onClos
       }}
     >
       <div
-        ref={modalRef}
+        ref={dialogRef}
         className="relative w-full max-w-4xl max-h-[92vh] overflow-y-auto rounded-xl bg-[#0c0f0d] border border-white/15 shadow-2xl text-typography-body flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >

@@ -1,7 +1,8 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { ProjectConsultant } from '@/types';
 import { XIcon, ExternalLinkIcon, StatusDot, CheckIcon, ShieldCheckIcon } from '@/components/icons';
 import { ClientVisual } from './ClientVisual';
+import { useModalDialog } from '@/hooks';
 
 interface ClientModalProps {
   client: ProjectConsultant | null;
@@ -10,30 +11,13 @@ interface ClientModalProps {
 }
 
 export const ClientModal: React.FC<ClientModalProps> = ({ client, isOpen, onClose }) => {
-  const modalRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
-  // Close on Escape key and prevent body scroll when open
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isOpen) {
-        onClose();
-      }
-    };
-
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-      window.addEventListener('keydown', handleKeyDown);
-      setTimeout(() => {
-        closeButtonRef.current?.focus();
-      }, 50);
-    }
-
-    return () => {
-      document.body.style.overflow = '';
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [isOpen, onClose]);
+  const { dialogRef } = useModalDialog<HTMLDivElement>({
+    isOpen: isOpen && !!client,
+    onClose,
+    initialFocusRef: closeButtonRef,
+  });
 
   if (!isOpen || !client) return null;
 
@@ -50,7 +34,7 @@ export const ClientModal: React.FC<ClientModalProps> = ({ client, isOpen, onClos
       }}
     >
       <div
-        ref={modalRef}
+        ref={dialogRef}
         className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-xl bg-[#0e1210] border border-white/15 shadow-2xl text-typography-body flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >

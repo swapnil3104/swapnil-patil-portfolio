@@ -15,12 +15,13 @@ export default defineConfig({
     open: false,
   },
   build: {
-    target: 'es2020',
+    target: 'es2022',
     minify: 'esbuild',
     rollupOptions: {
       output: {
         manualChunks: {
           'vendor-react': ['react', 'react-dom'],
+          'vendor-animation': ['gsap'],
           'projects-data': [
             './src/data/projects-github.ts',
             './src/data/projects-consultant.ts',

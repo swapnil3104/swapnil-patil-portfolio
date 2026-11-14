@@ -44,7 +44,10 @@ export const Navbar: React.FC = () => {
     hamburgerRef.current?.focus();
   };
 
-  const handleNavClick = (e: React.MouseEvent, href: string) => {
+  const handleNavClick = (e: React.MouseEvent<Element>, href: string) => {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) {
+      return;
+    }
     e.preventDefault();
     navigate(href);
   };
@@ -52,11 +55,10 @@ export const Navbar: React.FC = () => {
   return (
     <>
       <header
-        className={`sticky top-0 z-40 w-full overflow-x-clip transition-all duration-300 border-b ${
-          isScrolled
+        className={`sticky top-0 z-40 w-full overflow-x-clip transition-all duration-300 border-b ${isScrolled
             ? 'bg-[#0c0e0d]/90 backdrop-blur-md border-white/[0.12] py-2.5 shadow-lg shadow-black/40'
             : 'bg-[#0c0e0d]/80 backdrop-blur-md border-white/[0.08] py-4'
-        }`}
+          }`}
       >
         <Container className="flex items-center justify-between gap-3 sm:gap-4">
           {/* Left Zone: Brand with Interactive Code Logo Animation */}
@@ -74,20 +76,19 @@ export const Navbar: React.FC = () => {
               const isActive = currentRoute === item.id || (currentRoute === 'home' && activeSection === item.id);
 
               return (
-                <button
+                <a
                   key={item.id}
-                  type="button"
+                  href={item.href}
                   onClick={(e) => handleNavClick(e, item.href)}
-                  className={`group relative px-2 xl:px-2.5 py-1.5 rounded transition-all flex items-center gap-1 xl:gap-1.5 whitespace-nowrap flex-shrink-0 ${
-                    isActive
+                  aria-current={isActive ? 'page' : undefined}
+                  className={`group relative px-2 xl:px-2.5 py-1.5 rounded transition-all flex items-center gap-1 xl:gap-1.5 whitespace-nowrap flex-shrink-0 ${isActive
                       ? 'text-[#c6ff00] bg-white/[0.04]'
                       : 'text-typography-muted hover:text-white hover:bg-white/[0.02]'
-                  }`}
+                    }`}
                 >
                   <span
-                    className={`text-[10px] transition-colors ${
-                      isActive ? 'text-[#c6ff00]' : 'text-typography-dim group-hover:text-typography-muted'
-                    }`}
+                    className={`text-[10px] transition-colors ${isActive ? 'text-[#c6ff00]' : 'text-typography-dim group-hover:text-typography-muted'
+                      }`}
                   >
                     {item.number}
                   </span>
@@ -96,7 +97,7 @@ export const Navbar: React.FC = () => {
                   {isActive && (
                     <span className="absolute bottom-0 left-2 right-2 h-[2px] bg-[#c6ff00] shadow-[0_0_8px_rgba(198,255,0,0.6)] rounded-full" />
                   )}
-                </button>
+                </a>
               );
             })}
           </nav>
@@ -140,15 +141,15 @@ export const Navbar: React.FC = () => {
               <span>Resume</span>
             </a>
 
-            {/* Primary Get In Touch Button — Navigates to /contact */}
-            <button
-              type="button"
+            {/* Primary Get In Touch Action Link — Navigates to /contact */}
+            <a
+              href="/contact"
               onClick={(e) => handleNavClick(e, '/contact')}
-              className="relative group overflow-hidden whitespace-nowrap flex-shrink-0 px-3.5 sm:px-4 py-1.5 rounded-full border border-white/[0.18] bg-white/[0.05] hover:bg-[#c6ff00] hover:text-black hover:border-[#c6ff00] text-[#f2f4f3] font-medium text-xs font-mono tracking-tight transition-all duration-300 hover:shadow-[0_0_20px_rgba(198,255,0,0.35)] hover:-translate-y-0.5 active:translate-y-0"
+              className="relative group overflow-hidden whitespace-nowrap flex-shrink-0 px-3.5 sm:px-4 py-1.5 rounded-full border border-white/[0.18] bg-white/[0.05] hover:bg-[#c6ff00] hover:text-black hover:border-[#c6ff00] text-[#f2f4f3] font-medium text-xs font-mono tracking-tight transition-all duration-300 hover:shadow-[0_0_20px_rgba(198,255,0,0.35)] hover:-translate-y-0.5 active:translate-y-0 inline-flex items-center justify-center"
             >
               <span className="relative z-10">Get in touch</span>
               <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 ease-out pointer-events-none" />
-            </button>
+            </a>
 
             {/* Mobile Hamburger Button */}
             <button
@@ -162,19 +163,16 @@ export const Navbar: React.FC = () => {
             >
               <div className="w-5 h-4 flex flex-col justify-between" aria-hidden="true">
                 <span
-                  className={`h-0.5 w-full bg-current rounded-full transform transition-all duration-200 origin-left ${
-                    isMenuOpen ? 'rotate-45 translate-x-0.5' : ''
-                  }`}
+                  className={`h-0.5 w-full bg-current rounded-full transform transition-all duration-200 origin-left ${isMenuOpen ? 'rotate-45 translate-x-0.5' : ''
+                    }`}
                 />
                 <span
-                  className={`h-0.5 w-full bg-current rounded-full transition-opacity duration-200 ${
-                    isMenuOpen ? 'opacity-0' : 'opacity-100'
-                  }`}
+                  className={`h-0.5 w-full bg-current rounded-full transition-opacity duration-200 ${isMenuOpen ? 'opacity-0' : 'opacity-100'
+                    }`}
                 />
                 <span
-                  className={`h-0.5 w-full bg-current rounded-full transform transition-all duration-200 origin-left ${
-                    isMenuOpen ? '-rotate-45 translate-x-0.5' : ''
-                  }`}
+                  className={`h-0.5 w-full bg-current rounded-full transform transition-all duration-200 origin-left ${isMenuOpen ? '-rotate-45 translate-x-0.5' : ''
+                    }`}
                 />
               </div>
             </button>

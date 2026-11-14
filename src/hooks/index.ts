@@ -4,3 +4,4 @@ export * from './useCountUp';
 export * from './useRouter';
 export * from './useInView';
 export * from './useScrollReveal';
+export * from './useModalDialog';

@@ -1,41 +1,59 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ArrowUpIcon, TerminalIcon } from '@/components/icons';
+
+const SECTIONS = ['home', 'work', 'consultant', 'ui-ux', 'services', 'about', 'lab', 'contact'];
 
 export const ScrollProgressBar: React.FC = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [activeSection, setActiveSection] = useState('INIT');
   const [showBackToTop, setShowBackToTop] = useState(false);
+  const rafId = useRef<number | null>(null);
 
   useEffect(() => {
-    const handleScroll = () => {
+    let isTicking = false;
+
+    const updateScrollMetrics = () => {
+      const scrollY = window.scrollY;
       const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+
       if (totalHeight > 0) {
-        const progress = Math.min(100, Math.max(0, (window.scrollY / totalHeight) * 100));
+        const progress = Math.min(100, Math.max(0, (scrollY / totalHeight) * 100));
         setScrollProgress(progress);
-        setShowBackToTop(window.scrollY > 400);
+        setShowBackToTop(scrollY > 400);
       }
 
-      // Determine active section name for telemetry
-      const sections = ['home', 'work', 'consultant', 'ui-ux', 'services', 'about', 'lab', 'contact'];
-      const scrollPos = window.scrollY + 200;
-
-      for (const id of sections) {
+      // Determine active section using getBoundingClientRect
+      const viewportMid = window.innerHeight * 0.35;
+      for (const id of SECTIONS) {
         const el = document.getElementById(id);
         if (el) {
-          const top = el.offsetTop;
-          const height = el.offsetHeight;
-          if (scrollPos >= top && scrollPos < top + height) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= viewportMid && rect.bottom >= viewportMid) {
             setActiveSection(id.toUpperCase());
             break;
           }
         }
       }
+
+      isTicking = false;
+    };
+
+    const handleScroll = () => {
+      if (!isTicking) {
+        isTicking = true;
+        rafId.current = requestAnimationFrame(updateScrollMetrics);
+      }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
+    updateScrollMetrics();
 
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (rafId.current) {
+        cancelAnimationFrame(rafId.current);
+      }
+    };
   }, []);
 
   const scrollToTop = () => {
@@ -45,13 +63,18 @@ export const ScrollProgressBar: React.FC = () => {
     });
   };
 
+  const scale = Math.max(0, Math.min(1, scrollProgress / 100));
+
   return (
     <>
-      {/* Top Neon Scroll Progress Indicator Bar */}
+      {/* Top Neon Scroll Progress Indicator Bar - GPU Composited scaleX */}
       <div className="fixed top-0 left-0 right-0 h-[2.5px] bg-white/[0.04] z-50 pointer-events-none">
         <div
-          className="h-full bg-[#c6ff00] transition-[width] duration-75 ease-out shadow-[0_0_12px_#c6ff00,0_0_24px_rgba(198,255,0,0.8)] relative"
-          style={{ width: `${scrollProgress}%` }}
+          className="h-full w-full bg-[#c6ff00] origin-left shadow-[0_0_12px_#c6ff00,0_0_24px_rgba(198,255,0,0.8)] relative will-change-transform"
+          style={{
+            transform: `scaleX(${scale})`,
+            transition: 'transform 60ms linear',
+          }}
         >
           {/* Glowing cursor head at the edge of the bar */}
           <span className="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-[#c6ff00] shadow-[0_0_10px_#c6ff00] translate-x-1" />
