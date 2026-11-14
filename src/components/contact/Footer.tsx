@@ -150,6 +150,19 @@ export const Footer: React.FC = () => {
                   <span className="text-[#4f5854]">07</span> Contact &amp; Dispatch
                 </button>
               </li>
+              <li className="pt-2 border-t border-white/[0.06]">
+                <button
+                  type="button"
+                  onClick={() => {
+                    window.scrollTo({ top: 0, behavior: 'instant' });
+                    window.dispatchEvent(new CustomEvent('portfolio-replay-intro'));
+                  }}
+                  className="text-xs font-mono text-[#38bdf8] hover:text-[#7dd3fc] transition-colors flex items-center gap-2 group"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#38bdf8] group-hover:scale-125 transition-transform" />
+                  <span>Replay Workspace Intro</span>
+                </button>
+              </li>
             </ul>
           </div>
 
