@@ -154,20 +154,28 @@ export const WorkSection: React.FC = () => {
           <span className="px-3 py-1 rounded-full bg-[#c6ff00]/15 text-[#c6ff00] border border-[#c6ff00]/30 font-semibold">
             01 AI/ML &amp; Engineering (12 Repos)
           </span>
-          <button
-            type="button"
-            onClick={() => navigate('/consultant')}
-            className="px-3 py-1 rounded-full bg-white/[0.04] hover:bg-white/[0.08] text-typography-muted hover:text-typography-headline border border-white/10 transition-colors"
+          <a
+            href="/consultant"
+            onClick={(e) => {
+              if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+              e.preventDefault();
+              navigate('/consultant');
+            }}
+            className="px-3 py-1 rounded-full bg-white/[0.04] hover:bg-white/[0.08] text-typography-muted hover:text-typography-headline border border-white/10 transition-colors inline-block"
           >
             02 Independent Consultant (11 Live Sites) ↗
-          </button>
-          <button
-            type="button"
-            onClick={() => navigate('/ui-ux')}
-            className="px-3 py-1 rounded-full bg-white/[0.04] hover:bg-white/[0.08] text-typography-muted hover:text-typography-headline border border-white/10 transition-colors"
+          </a>
+          <a
+            href="/ui-ux"
+            onClick={(e) => {
+              if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+              e.preventDefault();
+              navigate('/ui-ux');
+            }}
+            className="px-3 py-1 rounded-full bg-white/[0.04] hover:bg-white/[0.08] text-typography-muted hover:text-typography-headline border border-white/10 transition-colors inline-block"
           >
             03 UI/UX Design (5 Figma Systems) ↗
-          </button>
+          </a>
         </div>
       </div>
 
@@ -212,6 +220,7 @@ export const WorkSection: React.FC = () => {
             return (
               <button
                 key={cat}
+                type="button"
                 onClick={() => {
                   setActiveCategory(cat);
                   setShowAllSecondary(false);
@@ -273,6 +282,7 @@ export const WorkSection: React.FC = () => {
             Try adjusting your search query or selecting &quot;All&quot; categories.
           </p>
           <button
+            type="button"
             onClick={() => {
               setActiveCategory('All');
               setSearchQuery('');
@@ -328,6 +338,7 @@ export const WorkSection: React.FC = () => {
             {!showAllSecondary ? (
               <div className="text-center py-6">
                 <button
+                  type="button"
                   onClick={() => setShowAllSecondary(true)}
                   className="group inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#111413] hover:bg-[#181d1a] border border-white/10 hover:border-accent-emerald/40 text-typography-headline text-xs font-mono transition-all duration-200 hover:shadow-lg hover:shadow-accent-emerald/10"
                 >
@@ -344,6 +355,7 @@ export const WorkSection: React.FC = () => {
                     Additional Engineering Repositories ({secondaryProjects.length} Projects)
                   </span>
                   <button
+                    type="button"
                     onClick={() => setShowAllSecondary(false)}
                     className="text-xs font-mono text-accent-emerald hover:underline"
                   >
@@ -364,6 +376,7 @@ export const WorkSection: React.FC = () => {
 
                 <div className="text-center pt-4">
                   <button
+                    type="button"
                     onClick={() => setShowAllSecondary(false)}
                     className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 text-typography-muted hover:text-white text-xs font-mono transition-colors"
                   >

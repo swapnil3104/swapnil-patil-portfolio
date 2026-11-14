@@ -162,6 +162,7 @@ export const ConsultantSection: React.FC = () => {
                 return (
                   <button
                     key={cat}
+                    type="button"
                     role="tab"
                     aria-selected={isActive}
                     onClick={() => setActiveCategory(cat)}

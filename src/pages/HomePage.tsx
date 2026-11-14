@@ -13,6 +13,12 @@ import { ArrowRightIcon, SparklesIcon, TerminalIcon } from 'lucide-react';
 export const HomePage: React.FC = () => {
   const { navigate } = useRouter();
 
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+    e.preventDefault();
+    navigate(href);
+  };
+
   return (
     <>
       {/* Section 00: Hero & Foundation Section with Interactive Portrait, Telemetry & Ticker */}
@@ -41,14 +47,14 @@ export const HomePage: React.FC = () => {
                 Browse our dedicated editorial Work directory featuring live performance benchmarks, side-by-side metric transformations, and category filters for AI/ML, commercial client builds, and UI/UX prototypes.
               </p>
             </div>
-            <button
-              type="button"
-              onClick={() => navigate('/work')}
+            <a
+              href="/work"
+              onClick={(e) => handleLinkClick(e, '/work')}
               className="inline-flex items-center gap-3 px-6 py-3.5 rounded-full bg-[#c6ff00] hover:bg-[#d4ff00] text-black font-mono font-semibold text-sm tracking-tight transition-all duration-300 shadow-[0_0_20px_rgba(198,255,0,0.25)] hover:shadow-[0_0_30px_rgba(198,255,0,0.45)] hover:-translate-y-0.5 active:translate-y-0 whitespace-nowrap flex-shrink-0"
             >
               <span>View Dedicated /work Page</span>
               <ArrowRightIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </button>
+            </a>
           </div>
         </div>
       </section>
@@ -84,14 +90,14 @@ export const HomePage: React.FC = () => {
                 Read the comprehensive engineering journey from Kolhapur to medical AI research grants, client deployments, and design philosophy on the dedicated About page.
               </p>
             </div>
-            <button
-              type="button"
-              onClick={() => navigate('/about')}
+            <a
+              href="/about"
+              onClick={(e) => handleLinkClick(e, '/about')}
               className="inline-flex items-center gap-3 px-6 py-3.5 rounded-full border border-white/[0.2] hover:border-[#c6ff00] bg-white/[0.05] hover:bg-[#c6ff00] hover:text-black text-white font-mono font-medium text-sm tracking-tight transition-all duration-300 shadow-[0_0_20px_rgba(198,255,0,0.15)] hover:-translate-y-0.5 active:translate-y-0 whitespace-nowrap flex-shrink-0"
             >
               <span>Explore Full /about Story</span>
               <ArrowRightIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </button>
+            </a>
           </div>
         </div>
       </section>

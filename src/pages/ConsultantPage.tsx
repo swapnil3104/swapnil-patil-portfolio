@@ -176,6 +176,7 @@ export const ConsultantPage: React.FC = () => {
                     return (
                       <button
                         key={cat}
+                        type="button"
                         role="tab"
                         aria-selected={isSelected}
                         onClick={() => {
@@ -319,14 +320,18 @@ export const ConsultantPage: React.FC = () => {
                 Explore 5 production Figma design systems, interactive mobile prototypes, and 450+ design tokens.
               </p>
             </div>
-            <button
-              type="button"
-              onClick={() => navigate('/ui-ux')}
+            <a
+              href="/ui-ux"
+              onClick={(e) => {
+                if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+                e.preventDefault();
+                navigate('/ui-ux');
+              }}
               className="inline-flex items-center gap-3 px-6 py-3.5 rounded-full bg-[#c6ff00] hover:bg-[#d4ff00] text-black font-mono font-semibold text-sm tracking-tight transition-all duration-300 shadow-[0_0_20px_rgba(198,255,0,0.25)] hover:shadow-[0_0_30px_rgba(198,255,0,0.45)] hover:-translate-y-0.5 whitespace-nowrap flex-shrink-0"
             >
               <span>Explore /ui-ux Page</span>
               <ArrowRightIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </button>
+            </a>
           </div>
         </div>
       </div>

@@ -94,6 +94,7 @@ export const TerminalPreloader: React.FC<TerminalPreloaderProps> = ({ onComplete
             terminal &bull; bash &bull; 80x24
           </div>
           <button
+            type="button"
             onClick={handleFinish}
             aria-label="Skip preloader"
             className="text-[11px] font-mono text-typography-muted hover:text-typography-headline px-2 py-0.5 rounded bg-white/[0.05] border border-white/[0.08] transition-colors"

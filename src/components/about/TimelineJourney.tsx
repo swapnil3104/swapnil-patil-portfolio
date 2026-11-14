@@ -105,6 +105,7 @@ export const TimelineJourney: React.FC = () => {
             return (
               <button
                 key={tab.id}
+                type="button"
                 onClick={() => setActiveFilter(tab.id)}
                 className={`px-3 py-1 rounded-full text-xs font-mono transition-all duration-150 ${
                   isActive
@@ -197,6 +198,7 @@ export const TimelineJourney: React.FC = () => {
                 {item.highlights && item.highlights.length > 0 && (
                   <div className="mt-3 pt-3 border-t border-white/[0.05]">
                     <button
+                      type="button"
                       onClick={() => toggleExpand(item.id)}
                       className="flex items-center justify-between w-full text-left text-xs font-mono text-[#8a928f] hover:text-[#f2f4f3] transition-colors py-1"
                     >

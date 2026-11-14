@@ -110,6 +110,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         {/* Project Title */}
         <h3 className="text-xl font-bold font-display text-[#f2f4f3] group-hover:text-[#c6ff00] transition-colors mb-2.5 tracking-tight">
           <button
+            type="button"
             onClick={() => onOpenCaseStudy(project)}
             className="text-left hover:underline focus:outline-none"
           >
@@ -165,6 +166,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       {/* Card Footer Actions */}
       <div className="pt-4 border-t border-white/[0.08] flex items-center justify-between gap-3">
         <button
+          type="button"
           onClick={() => onOpenCaseStudy(project)}
           className="inline-flex items-center gap-1.5 text-xs font-mono text-[#f2f4f3] hover:text-[#c6ff00] transition-colors py-1 focus:outline-none"
         >
