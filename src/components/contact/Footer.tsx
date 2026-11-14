@@ -9,6 +9,7 @@ import {
   MapPinIcon,
   ExternalLinkIcon,
 } from '@/components/icons';
+import { CodeSignatureAnimation } from '@/components/shared/CodeSignatureAnimation';
 import { CONTACT_INFO } from '@/data';
 import { useRouter } from '@/hooks/useRouter';
 
@@ -195,12 +196,8 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Soren Hale Giant Typography Signature */}
-        <div className="pt-8 pb-4 text-center select-none overflow-hidden">
-          <div className="font-display font-black text-[13vw] leading-none tracking-tighter text-white/[0.07] hover:text-white/[0.12] transition-colors duration-500 whitespace-nowrap">
-            SWAPNIL PATIL
-          </div>
-        </div>
+        {/* Soren Hale Giant Typography Signature with Interactive Code Animation */}
+        <CodeSignatureAnimation />
 
         {/* Bottom Bar: Copyright & Back-to-Top Button */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-[#8a928f] pt-4 border-t border-white/[0.06]">

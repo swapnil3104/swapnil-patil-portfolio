@@ -27,7 +27,7 @@ export const HomePage: React.FC = () => {
       {/* Soren Hale Editorial Work Callout Card */}
       <section className="py-8 bg-[#0c0e0d] border-y border-white/[0.06] relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-[#c6ff00]/[0.02] via-transparent to-[#c6ff00]/[0.02] pointer-events-none" />
-        <div className="layout-container relative z-10">
+        <div className="layout-container relative z-10 scroll-reveal">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6 p-6 sm:p-8 rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-[#c6ff00]/40 transition-all duration-300 group">
             <div className="space-y-2 text-center md:text-left">
               <div className="inline-flex items-center gap-2 text-xs font-mono text-[#c6ff00] uppercase tracking-wider">
@@ -70,7 +70,7 @@ export const HomePage: React.FC = () => {
 
       {/* Soren Hale Editorial About Callout Card */}
       <section className="py-8 bg-[#0c0e0d] border-y border-white/[0.06] relative overflow-hidden">
-        <div className="layout-container relative z-10">
+        <div className="layout-container relative z-10 scroll-reveal">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6 p-6 sm:p-8 rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-[#c6ff00]/40 transition-all duration-300 group">
             <div className="space-y-2 text-center md:text-left">
               <div className="inline-flex items-center gap-2 text-xs font-mono text-[#c6ff00] uppercase tracking-wider">

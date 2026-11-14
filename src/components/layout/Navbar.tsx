@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Container } from './Container';
-import { StatusDot, GitHubIcon, ExternalLinkIcon, DownloadIcon } from '@/components/icons';
+import { GitHubIcon, ExternalLinkIcon, DownloadIcon } from '@/components/icons';
 import { MobileDrawer, NavItem } from './MobileDrawer';
+import { LogoCodeAnimation } from '@/components/shared/LogoCodeAnimation';
 import { useScrollspy } from '@/hooks/useScrollspy';
 import { useRouter } from '@/hooks/useRouter';
 import { trackEvent } from '@/utils/analytics';
@@ -58,20 +59,9 @@ export const Navbar: React.FC = () => {
         }`}
       >
         <Container className="flex items-center justify-between gap-3 sm:gap-4">
-          {/* Left Zone: Brand */}
+          {/* Left Zone: Brand with Interactive Code Logo Animation */}
           <div className="flex items-center flex-shrink-0">
-            <button
-              type="button"
-              onClick={(e) => handleNavClick(e, '/')}
-              className="group flex items-center gap-2.5 font-display font-bold text-base sm:text-lg text-typography-headline hover:text-sh-brass transition-all duration-200 whitespace-nowrap hover:scale-[1.02]"
-              aria-label="Swapnil Patil Home"
-            >
-              <StatusDot pulse />
-              <span className="tracking-tight text-white group-hover:text-sh-brass transition-colors">
-                Swapnil Patil
-              </span>
-              <span className="inline-block w-1.5 h-3.5 bg-[#c6ff00] ml-0.5" />
-            </button>
+            <LogoCodeAnimation onClick={(e) => handleNavClick(e, '/')} />
           </div>
 
           {/* Center Zone: Desktop Nav Links (Hidden below lg/900px) */}

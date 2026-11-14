@@ -16,7 +16,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
   className = '',
 }) => {
   return (
-    <div className={`flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 lg:mb-16 ${className}`}>
+    <div className={`flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 lg:mb-16 scroll-reveal ${className}`}>
       <div className="max-w-2xl">
         <div className="mono-eyebrow mb-3">
           <span className="text-[#c6ff00]">//</span>

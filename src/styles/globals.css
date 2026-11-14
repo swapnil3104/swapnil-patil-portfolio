@@ -1,5 +1,15 @@
 @import './tokens.css';
 
+/* Colour tokens — override to re-skin the cipher decoder effect:
+   --ink    main text colour (defaults to currentColor)
+   --ink-2  primary accent   --ink-3  secondary accent */
+:root {
+  --ink: #f2f4f3;
+  --ink-2: #FF4FD8;
+  --ink-3: #4FF8FF;
+  --ink-brass: #c6ff00;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -198,15 +208,23 @@
     border-color: var(--sh-hair2);
   }
 
-  /* Technical Card */
+  /* Technical Card with Scroll Reveal */
   .tech-card {
     background-color: var(--sh-elevated, #131715);
     border: 1px solid var(--sh-hair, rgba(255, 255, 255, 0.08));
     border-radius: 14px;
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.25s ease;
+    will-change: opacity, transform;
   }
 
-  .tech-card:hover {
+  .tech-card.is-revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .tech-card.is-revealed:hover {
     border-color: rgba(198, 255, 0, 0.35);
   }
 
@@ -217,29 +235,39 @@
     color: var(--sh-stone);
   }
 
-  /* Soren Hale Editorial Card */
+  /* Soren Hale Editorial Card with Scroll Reveal */
   .sh-editorial-card {
     background-color: #111413;
     border: 1px solid rgba(255, 255, 255, 0.09);
     border-radius: 20px;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+    will-change: opacity, transform;
   }
 
-  .sh-editorial-card:hover {
+  .sh-editorial-card.is-revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .sh-editorial-card.is-revealed:hover {
     border-color: #c6ff00;
     transform: translateY(-4px);
     box-shadow: 0 0 35px rgba(198, 255, 0, 0.16);
   }
 
   /* Scroll Reveal & Stagger Animation */
-  .sh-fade-up {
+  .sh-fade-up,
+  .scroll-reveal {
     opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateY(28px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), filter 0.7s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: opacity, transform;
   }
 
-  .sh-fade-up.is-visible {
+  .sh-fade-up.is-visible,
+  .scroll-reveal.is-revealed {
     opacity: 1;
     transform: translateY(0);
   }
@@ -250,6 +278,48 @@
   .sh-delay-300 { transition-delay: 300ms; }
   .sh-delay-400 { transition-delay: 400ms; }
   .sh-delay-500 { transition-delay: 500ms; }
+
+  /* Interactive Ripple Animation on Mouse Click */
+  @keyframes cursor-ripple {
+    0% {
+      width: 0px;
+      height: 0px;
+      opacity: 0.9;
+      box-shadow: 0 0 10px #c6ff00;
+    }
+    100% {
+      width: 64px;
+      height: 64px;
+      opacity: 0;
+      box-shadow: 0 0 24px rgba(198, 255, 0, 0);
+    }
+  }
+
+  .animate-cursor-ripple {
+    animation: cursor-ripple 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  /* Laser Scanner Line Sweep */
+  @keyframes laser-sweep {
+    0% {
+      top: 0%;
+      opacity: 0;
+    }
+    20% {
+      opacity: 1;
+    }
+    80% {
+      opacity: 1;
+    }
+    100% {
+      top: 100%;
+      opacity: 0;
+    }
+  }
+
+  .animate-laser-sweep {
+    animation: laser-sweep 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
 
   /* Blinking Block Cursor */
   .sh-cursor-block {
@@ -279,6 +349,108 @@
     color: #c6ff00;
     font-weight: 700;
     text-shadow: 0 0 16px rgba(198, 255, 0, 0.4);
+  }
+
+  /* 10 Cipher — scrambled characters decode into the word, then re-encrypt */
+  .fx-decoder {
+    font: 600 28px/1.2 "JetBrains Mono", monospace;
+    letter-spacing: .08em;
+    color: var(--ink-3);
+    display: inline-block;
+  }
+  .fx-decoder::after {
+    content: "▓K#R1&Q";
+    animation: fx-decoder 4s steps(1) infinite;
+  }
+
+  /* 10 Cipher for SWAPNIL PATIL — scaled & responsive */
+  .fx-decoder-swapnil {
+    font-family: var(--font-mono, "JetBrains Mono", monospace);
+    font-weight: 800;
+    font-size: clamp(2.2rem, 7.8vw, 6.75rem);
+    line-height: 1.1;
+    letter-spacing: .08em;
+    color: var(--ink-3);
+    display: inline-block;
+    text-align: center;
+    white-space: nowrap;
+    text-transform: uppercase;
+    user-select: none;
+    transition: text-shadow 0.3s ease;
+  }
+  .fx-decoder-swapnil::after {
+    content: "▓K#R1&Q ▒4%X@!";
+    animation: fx-decoder-swapnil 4s steps(1) infinite;
+  }
+}
+
+/* Cipher Decoder Animations */
+@keyframes fx-decoder {
+  0%   { content: "▓K#R1&Q"; color: var(--ink-3); }
+  8%   { content: "D%#OD3▒"; }
+  16%  { content: "DE☰O*ER"; }
+  24%  { content: "DEC0D£R"; }
+  32%  { content: "DECOD€R"; }
+  40%, 82% { content: "DECODER"; color: var(--ink); }
+  88%  { content: "D3C0*€R"; color: var(--ink-3); }
+  94%  { content: "▒#COD1Q"; }
+}
+
+@keyframes fx-decoder-swapnil {
+  0%   {
+    content: "▓K#R1&Q ▒4%X@!";
+    color: var(--ink-3);
+    text-shadow: 0 0 16px var(--ink-3);
+  }
+  8%   {
+    content: "S%#PN3▒ P@7!L";
+    color: var(--ink-2);
+    text-shadow: 0 0 20px var(--ink-2);
+  }
+  16%  {
+    content: "SW☰PN*L P4T!L";
+    color: var(--ink-3);
+    text-shadow: 0 0 18px var(--ink-3);
+  }
+  24%  {
+    content: "SWAPN0L P4T£L";
+    color: var(--ink-2);
+    text-shadow: 0 0 22px var(--ink-2);
+  }
+  32%  {
+    content: "SWAPNIL PAT€L";
+    color: var(--ink-2);
+    text-shadow: 0 0 26px var(--ink-2);
+  }
+  40%, 82% {
+    content: "SWAPNIL PATIL";
+    color: var(--ink);
+    text-shadow: 0 0 32px var(--ink-2), 0 0 64px rgba(79, 248, 255, 0.35);
+  }
+  88%  {
+    content: "SW4PN!L P@7*R";
+    color: var(--ink-3);
+    text-shadow: 0 0 18px var(--ink-3);
+  }
+  94%  {
+    content: "▒#KPN1Q ▓!4X@%";
+    color: var(--ink-2);
+    text-shadow: 0 0 16px var(--ink-2);
+  }
+}
+
+/* Custom Green Pointer Hide Native Cursor on Desktop */
+@media (hover: hover) and (pointer: fine) {
+  body.has-custom-cursor,
+  body.has-custom-cursor a,
+  body.has-custom-cursor button,
+  body.has-custom-cursor input,
+  body.has-custom-cursor textarea,
+  body.has-custom-cursor select,
+  body.has-custom-cursor [role="button"],
+  body.has-custom-cursor .clickable,
+  body.has-custom-cursor .cursor-pointer {
+    cursor: none !important;
   }
 }
 

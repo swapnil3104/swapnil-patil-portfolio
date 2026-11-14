@@ -7,6 +7,7 @@ interface SectionWrapperProps extends React.HTMLAttributes<HTMLElement> {
   className?: string;
   containerClassName?: string;
   hasTopBorder?: boolean;
+  animateOnScroll?: boolean;
 }
 
 export const SectionWrapper: React.FC<SectionWrapperProps> = ({
@@ -15,6 +16,7 @@ export const SectionWrapper: React.FC<SectionWrapperProps> = ({
   className = '',
   containerClassName = '',
   hasTopBorder = true,
+  animateOnScroll = true,
   ...props
 }) => {
   return (
@@ -25,7 +27,7 @@ export const SectionWrapper: React.FC<SectionWrapperProps> = ({
       } ${className}`}
       {...props}
     >
-      <Container className={containerClassName}>
+      <Container className={`${animateOnScroll ? 'scroll-reveal' : ''} ${containerClassName}`}>
         {children}
       </Container>
     </section>

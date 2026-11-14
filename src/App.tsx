@@ -2,6 +2,11 @@ import React, { useEffect } from 'react';
 import { Navbar, TerminalPreloader } from '@/components/layout';
 import { Footer } from '@/components/contact';
 import {
+  GreenCursor,
+  ScrollProgressBar,
+  CodeParticlesBackground,
+} from '@/components/shared';
+import {
   HomePage,
   WorkPage,
   AboutPage,
@@ -12,17 +17,28 @@ import {
   ContactPage,
 } from '@/pages';
 import { useRouter } from '@/hooks/useRouter';
+import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { trackPageView } from '@/utils/analytics';
 
 export const App: React.FC = () => {
   const { currentRoute } = useRouter();
+  useScrollReveal();
 
   useEffect(() => {
     trackPageView();
   }, [currentRoute]);
 
   return (
-    <div className="min-h-screen bg-[#0c0e0d] text-[#f2f4f3] flex flex-col selection:bg-[#c6ff00]/25 selection:text-black">
+    <div className="min-h-screen bg-[#0c0e0d] text-[#f2f4f3] flex flex-col selection:bg-[#c6ff00]/25 selection:text-black relative">
+      {/* Precision Green Laser Point Cursor */}
+      <GreenCursor />
+
+      {/* Top Neon Scroll Progress Bar & Floating Telemetry HUD */}
+      <ScrollProgressBar />
+
+      {/* Deep Canvas Ambient Code Particles Motion */}
+      <CodeParticlesBackground />
+
       {/* Skip to Content Link - First in DOM */}
       <a href="#main" className="skip-to-content">
         Skip to main content
@@ -35,7 +51,7 @@ export const App: React.FC = () => {
       <Navbar />
 
       {/* Main Content Area */}
-      <main id="main" className="flex-1">
+      <main id="main" className="flex-1 relative z-10">
         {currentRoute === 'work' && <WorkPage />}
         {currentRoute === 'about' && <AboutPage />}
         {currentRoute === 'consultant' && <ConsultantPage />}
@@ -46,7 +62,7 @@ export const App: React.FC = () => {
         {currentRoute === 'home' && <HomePage />}
       </main>
 
-      {/* Global Footer with Full-Bleed Display Typography */}
+      {/* Global Footer with Full-Bleed Display Typography & Code Animation */}
       <Footer />
     </div>
   );
