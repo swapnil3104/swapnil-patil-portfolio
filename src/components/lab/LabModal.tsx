@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { LabProject } from '@/types';
 import {
   XIcon,
@@ -36,11 +37,11 @@ export const LabModal: React.FC<LabModalProps> = ({ project, isOpen, onClose }) 
     setTimeout(() => setCopied(false), 2000);
   };
 
-  if (!isOpen || !project) return null;
+  if (!isOpen || !project || typeof document === 'undefined') return null;
 
-  return (
+  return createPortal(
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-md animate-fade-in"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-md animate-fade-in overflow-y-auto"
       role="dialog"
       aria-modal="true"
       aria-labelledby="lab-modal-title"
@@ -50,7 +51,7 @@ export const LabModal: React.FC<LabModalProps> = ({ project, isOpen, onClose }) 
     >
       <div
         ref={dialogRef}
-        className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-xl bg-[#0c0f0d] border border-white/15 shadow-2xl text-typography-body flex flex-col p-6 sm:p-8"
+        className="relative my-auto w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-xl bg-[#0c0f0d] border border-white/15 shadow-2xl text-typography-body flex flex-col p-6 sm:p-8"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
@@ -240,7 +241,8 @@ export const LabModal: React.FC<LabModalProps> = ({ project, isOpen, onClose }) 
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 

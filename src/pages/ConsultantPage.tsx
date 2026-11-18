@@ -317,7 +317,7 @@ export const ConsultantPage: React.FC = () => {
                 Looking for design systems and atomic components?
               </h3>
               <p className="text-sm font-sans text-[#8a928f] max-w-xl">
-                Explore 5 production Figma design systems, interactive mobile prototypes, and 450+ design tokens.
+                Explore 5+ production Figma design systems, interactive mobile prototypes, and 450+ design tokens.
               </p>
             </div>
             <a

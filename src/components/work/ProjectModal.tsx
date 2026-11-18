@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { ProjectGitHub } from '@/types';
 import { GitHubIcon, ExternalLinkIcon, XIcon, CopyIcon, CheckIcon, LayersIcon, CpuIcon, SparklesIcon } from '@/components/icons';
 import { ProjectVisual } from './ProjectVisual';
@@ -31,7 +32,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onC
     }
   }, [project?.id, isOpen]);
 
-  if (!isOpen || !project) return null;
+  if (!isOpen || !project || typeof document === 'undefined') return null;
 
   const caseStudy = project.caseStudy;
   const cloneCommand = `git clone ${project.repoUrl}.git`;
@@ -46,23 +47,27 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onC
     }
   };
 
-  return (
+  return createPortal(
     <div
       className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto"
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-project-title"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
     >
       {/* Backdrop */}
       <div
         className="fixed inset-0 bg-black/80 backdrop-blur-md transition-opacity duration-200"
         onClick={onClose}
+        aria-hidden="true"
       />
 
       {/* Modal Dialog Window */}
       <div
         ref={dialogRef}
-        className="relative w-full max-w-4xl max-h-[92vh] flex flex-col bg-[#0f1210] border border-white/15 rounded-2xl shadow-2xl shadow-black/90 overflow-hidden text-typography-body z-10"
+        className="relative my-auto w-full max-w-4xl max-h-[92vh] flex flex-col bg-[#0f1210] border border-white/15 rounded-2xl shadow-2xl shadow-black/90 overflow-hidden text-typography-body z-10"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header Bar */}
@@ -437,7 +442,8 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onC
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 

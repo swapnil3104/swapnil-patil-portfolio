@@ -97,6 +97,17 @@ export const LaptopStartupIntro: React.FC<LaptopStartupIntroProps> = ({ onComple
     onComplete?.();
   }, [onComplete]);
 
+  // Prevent background scrolling while intro is active
+  useEffect(() => {
+    if (isVisible) {
+      const prevOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = prevOverflow;
+      };
+    }
+  }, [isVisible]);
+
   // Listen to Replay event from footer or portfolio controls
   useEffect(() => {
     const handleReplay = () => {
@@ -111,26 +122,29 @@ export const LaptopStartupIntro: React.FC<LaptopStartupIntroProps> = ({ onComple
       setActiveStepIndex(0);
       setProgressPercent(0);
       setIsVisible(true);
+      window.scrollTo(0, 0);
 
-      if (overlayRef.current) {
-        gsap.set(overlayRef.current, { opacity: 1, pointerEvents: 'auto' });
-      }
-      if (laptopWrapperRef.current) {
-        gsap.set(laptopWrapperRef.current, {
-          scale: 1,
-          y: 0,
-          z: 0,
-          rotateX: 0,
-          rotateY: 0,
-          opacity: 1,
-        });
-      }
-      if (welcomeTextRef.current) {
-        gsap.set(welcomeTextRef.current, { opacity: 1, y: 0 });
-      }
-      if (startBtnRef.current) {
-        gsap.set(startBtnRef.current, { opacity: 1, scale: 1, pointerEvents: 'auto' });
-      }
+      requestAnimationFrame(() => {
+        if (overlayRef.current) {
+          gsap.set(overlayRef.current, { opacity: 1, pointerEvents: 'auto' });
+        }
+        if (laptopWrapperRef.current) {
+          gsap.set(laptopWrapperRef.current, {
+            scale: 1,
+            y: 0,
+            z: 0,
+            rotateX: 0,
+            rotateY: 0,
+            opacity: 1,
+          });
+        }
+        if (welcomeTextRef.current) {
+          gsap.set(welcomeTextRef.current, { opacity: 1, y: 0 });
+        }
+        if (startBtnRef.current) {
+          gsap.set(startBtnRef.current, { opacity: 1, scale: 1, pointerEvents: 'auto' });
+        }
+      });
     };
 
     window.addEventListener('portfolio-replay-intro', handleReplay);

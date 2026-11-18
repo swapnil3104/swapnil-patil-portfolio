@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect } from 'react';
+import React, { Suspense, useEffect, useState, useCallback } from 'react';
 import { Navbar } from '@/components/layout';
 import { Footer } from '@/components/contact';
 import {
@@ -10,6 +10,7 @@ import { HomePage } from '@/pages/HomePage';
 import { useRouter } from '@/hooks/useRouter';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { trackPageView } from '@/utils/analytics';
+import { LaptopStartupIntro } from '@/components/intro';
 
 // Modern Route-Level Code Splitting for Lean Entry Chunks
 const WorkPage = React.lazy(() =>
@@ -34,10 +35,16 @@ const ContactPage = React.lazy(() =>
   import('@/pages/ContactPage').then((m) => ({ default: m.ContactPage }))
 );
 
-// Code-split heavy 3D Laptop intro scene to avoid blocking initial critical render path
-const LaptopStartupIntro = React.lazy(() =>
-  import('@/components/intro').then((m) => ({ default: m.LaptopStartupIntro }))
-);
+const INTRO_STORAGE_KEY = 'swapnil_patil_intro_seen_v2';
+
+const checkIntroSeen = () => {
+  if (typeof window === 'undefined') return true;
+  try {
+    return sessionStorage.getItem(INTRO_STORAGE_KEY) === 'true';
+  } catch {
+    return true;
+  }
+};
 
 const PageFallback: React.FC = () => (
   <div
@@ -56,10 +63,24 @@ const PageFallback: React.FC = () => (
 export const App: React.FC = () => {
   const { currentRoute } = useRouter();
   useScrollReveal();
+  const [introActive, setIntroActive] = useState<boolean>(() => !checkIntroSeen());
+
+  const handleIntroComplete = useCallback(() => {
+    setIntroActive(false);
+  }, []);
 
   useEffect(() => {
     trackPageView();
   }, [currentRoute]);
+
+  // Replay intro listener
+  useEffect(() => {
+    const handleReplayEvent = () => {
+      setIntroActive(true);
+    };
+    window.addEventListener('portfolio-replay-intro', handleReplayEvent);
+    return () => window.removeEventListener('portfolio-replay-intro', handleReplayEvent);
+  }, []);
 
   return (
     <div className="min-h-screen bg-[#0c0e0d] text-[#f2f4f3] flex flex-col selection:bg-[#c6ff00]/25 selection:text-black relative">
@@ -77,30 +98,36 @@ export const App: React.FC = () => {
         Skip to main content
       </a>
 
-      {/* Interactive 3D Laptop Startup Intro (Async Loaded) */}
-      <Suspense fallback={null}>
-        <LaptopStartupIntro />
-      </Suspense>
+      {/* Interactive 3D Laptop Startup Intro */}
+      <LaptopStartupIntro onComplete={handleIntroComplete} />
 
-      {/* Sticky Navigation Header with Mobile Drawer & Scrollspy */}
-      <Navbar />
+      {/* Website Shell: Hidden while intro is running to prevent any preview flash */}
+      <div
+        className={`flex-1 flex flex-col transition-opacity duration-700 ${
+          introActive ? 'opacity-0 pointer-events-none' : 'opacity-100'
+        }`}
+        aria-hidden={introActive}
+      >
+        {/* Sticky Navigation Header with Mobile Drawer & Scrollspy */}
+        <Navbar />
 
-      {/* Main Content Area with Suspense Boundaries for Fast Initial Paint */}
-      <main id="main" className="flex-1 relative z-10">
-        <Suspense fallback={<PageFallback />}>
-          {currentRoute === 'work' && <WorkPage />}
-          {currentRoute === 'about' && <AboutPage />}
-          {currentRoute === 'consultant' && <ConsultantPage />}
-          {currentRoute === 'ui-ux' && <UIUXPage />}
-          {currentRoute === 'services' && <ServicesPage />}
-          {currentRoute === 'lab' && <LabPage />}
-          {currentRoute === 'contact' && <ContactPage />}
-          {currentRoute === 'home' && <HomePage />}
-        </Suspense>
-      </main>
+        {/* Main Content Area with Suspense Boundaries for Fast Initial Paint */}
+        <main id="main" className="flex-1 relative z-10">
+          <Suspense fallback={<PageFallback />}>
+            {currentRoute === 'work' && <WorkPage />}
+            {currentRoute === 'about' && <AboutPage />}
+            {currentRoute === 'consultant' && <ConsultantPage />}
+            {currentRoute === 'ui-ux' && <UIUXPage />}
+            {currentRoute === 'services' && <ServicesPage />}
+            {currentRoute === 'lab' && <LabPage />}
+            {currentRoute === 'contact' && <ContactPage />}
+            {currentRoute === 'home' && <HomePage />}
+          </Suspense>
+        </main>
 
-      {/* Global Footer with Full-Bleed Display Typography & Code Animation */}
-      <Footer />
+        {/* Global Footer with Full-Bleed Display Typography & Code Animation */}
+        <Footer />
+      </div>
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { ProjectConsultant } from '@/types';
 import { XIcon, ExternalLinkIcon, StatusDot, CheckIcon, ShieldCheckIcon } from '@/components/icons';
 import { ClientVisual } from './ClientVisual';
@@ -19,13 +20,13 @@ export const ClientModal: React.FC<ClientModalProps> = ({ client, isOpen, onClos
     initialFocusRef: closeButtonRef,
   });
 
-  if (!isOpen || !client) return null;
+  if (!isOpen || !client || typeof document === 'undefined') return null;
 
   const engagement = client.engagement;
 
-  return (
+  return createPortal(
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-md animate-fade-in"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-md animate-fade-in overflow-y-auto"
       role="dialog"
       aria-modal="true"
       aria-labelledby="consultant-modal-title"
@@ -35,7 +36,7 @@ export const ClientModal: React.FC<ClientModalProps> = ({ client, isOpen, onClos
     >
       <div
         ref={dialogRef}
-        className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-xl bg-[#0e1210] border border-white/15 shadow-2xl text-typography-body flex flex-col"
+        className="relative my-auto w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-xl bg-[#0e1210] border border-white/15 shadow-2xl text-typography-body flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header Preview Graphic */}
@@ -227,7 +228,8 @@ export const ClientModal: React.FC<ClientModalProps> = ({ client, isOpen, onClos
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 

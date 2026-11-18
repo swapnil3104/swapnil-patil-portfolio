@@ -174,7 +174,7 @@ export const WorkSection: React.FC = () => {
             }}
             className="px-3 py-1 rounded-full bg-white/[0.04] hover:bg-white/[0.08] text-typography-muted hover:text-typography-headline border border-white/10 transition-colors inline-block"
           >
-            03 UI/UX Design (5 Figma Systems) ↗
+            03 UI/UX Design (5+ Figma Systems) ↗
           </a>
         </div>
       </div>

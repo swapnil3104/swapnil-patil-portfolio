@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { ProjectUIUX } from '@/types';
 import {
   XIcon,
@@ -40,7 +41,7 @@ export const DesignModal: React.FC<DesignModalProps> = ({ design, isOpen, onClos
     }
   }, [design, isOpen]);
 
-  if (!isOpen || !design) return null;
+  if (!isOpen || !design || typeof document === 'undefined') return null;
 
   const caseStudy = design.caseStudy;
 
@@ -54,9 +55,9 @@ export const DesignModal: React.FC<DesignModalProps> = ({ design, isOpen, onClos
     }
   };
 
-  return (
+  return createPortal(
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-md animate-fade-in"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-md animate-fade-in overflow-y-auto"
       role="dialog"
       aria-modal="true"
       aria-labelledby="design-modal-title"
@@ -66,7 +67,7 @@ export const DesignModal: React.FC<DesignModalProps> = ({ design, isOpen, onClos
     >
       <div
         ref={dialogRef}
-        className="relative w-full max-w-4xl max-h-[92vh] overflow-y-auto rounded-xl bg-[#0c0f0d] border border-white/15 shadow-2xl text-typography-body flex flex-col"
+        className="relative my-auto w-full max-w-4xl max-h-[92vh] overflow-y-auto rounded-xl bg-[#0c0f0d] border border-white/15 shadow-2xl text-typography-body flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header Preview Graphic */}
@@ -455,7 +456,8 @@ export const DesignModal: React.FC<DesignModalProps> = ({ design, isOpen, onClos
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 

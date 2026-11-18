@@ -62,7 +62,7 @@ export const HeroEditorial: React.FC = () => {
             Figma UX Systems
           </dt>
           <dd className="text-2xl sm:text-3xl lg:text-4xl font-bold font-display text-[#c6ff00] tracking-tight order-1">
-            {figmaSystems}
+            {figmaSystems}+
           </dd>
         </div>
       </dl>
