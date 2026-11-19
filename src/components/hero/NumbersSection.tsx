@@ -130,18 +130,18 @@ export const NumbersSection: React.FC = () => {
               {/* Metric 1 */}
               <div>
                 <div className="flex flex-wrap items-center justify-between gap-1 text-xs font-mono mb-2">
-                  <span className="text-[#f2f4f3] font-medium">ISLR Sequence Inference Latency</span>
+                  <span className="text-[#f2f4f3] font-medium">3D Car Running Game (WebGL Framerate)</span>
                   <div className="flex items-center gap-1.5 shrink-0">
-                    <del className="text-[#8a928f] line-through text-[11px]">120 ms</del>
+                    <del className="text-[#8a928f] line-through text-[11px]">30 FPS</del>
                     <span className="text-[#8a928f]">&rarr;</span>
-                    <span className="text-[#c6ff00] font-bold text-sm">18 ms</span>
+                    <span className="text-[#c6ff00] font-bold text-sm">60 FPS</span>
                   </div>
                 </div>
                 <div className="w-full h-2 rounded-full bg-white/[0.08] overflow-hidden">
-                  <div className="h-full bg-[#c6ff00] rounded-full transition-all duration-1000" style={{ width: '85%' }} />
+                  <div className="h-full bg-[#c6ff00] rounded-full transition-all duration-1000" style={{ width: '100%' }} />
                 </div>
                 <div className="text-[11px] font-mono text-[#8a928f] mt-1">
-                  Budget: 50ms (achieved 18ms on mid-tier CPU)
+                  Budget: 60 FPS target (smooth 16.6ms render loop with Three.js WebGL)
                 </div>
               </div>
 

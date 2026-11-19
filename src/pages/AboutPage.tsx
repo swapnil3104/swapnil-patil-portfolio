@@ -206,7 +206,7 @@ export const AboutPage: React.FC = () => {
                     Real-time computer vision & assistive AI.
                   </h3>
                   <p className="text-sm sm:text-base text-[#8a928f] leading-relaxed mb-3">
-                    Next came real-time systems: building Indian Sign Language Recognition (ISLR Studio) with MediaPipe landmark tracking at 60 FPS, and Self-Care AI medical diagnostic screening with Grad-CAM visual heatmaps.
+                    Next came real-time systems: building biometric intelligence and computer vision pipelines—such as Face Recognition Attendance Management with OpenCV and DrishtiDrive AI driver fatigue tracking.
                   </p>
                   <p className="text-sm sm:text-base text-[#8a928f] leading-relaxed">
                     Secured a ₹1,50,000+ institutional innovation grant from the Institution's Innovation Council (IIC) and won 1st Place in the Discovery 2k24 state-level business symposium.
@@ -336,7 +336,7 @@ export const AboutPage: React.FC = () => {
                   <span>Updated November 2026</span>
                 </div>
                 <h3 className="font-display font-bold text-2xl sm:text-3xl text-typography-headline mb-2 leading-tight">
-                  Engineering Quantum Deepfake Detection & ISLR Studio, available for select AI/ML & Full-Stack contracts.
+                  Engineering Quantum Deepfake Detection & Mentora AI, available for select AI/ML & Full-Stack contracts.
                 </h3>
               </div>
 

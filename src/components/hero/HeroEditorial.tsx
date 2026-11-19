@@ -7,10 +7,11 @@ import {
   ArrowDownIcon,
 } from '@/components/icons';
 import { useCountUp } from '@/hooks';
+import { projectsGitHub } from '@/data/projects-github';
 
 export const HeroEditorial: React.FC = () => {
   const deployments = useCountUp({ end: 11, duration: 1200 });
-  const projects = useCountUp({ end: 12, duration: 1400 });
+  const projects = useCountUp({ end: projectsGitHub.length, duration: 1400 });
   const figmaSystems = useCountUp({ end: 5, duration: 1000 });
   return (
     <div className="flex flex-col justify-center">

@@ -5,6 +5,7 @@ import { projectsUIUX } from '@/data/projects-uiux';
 import { ProjectGitHub, ProjectConsultant, ProjectUIUX } from '@/types';
 import { ProjectIntakeForm } from '@/components/shared/ProjectIntakeForm';
 import { ArrowUpRightIcon, ArrowRightIcon } from 'lucide-react';
+import { GitHubIcon } from '@/components/icons';
 import { useCountUp } from '@/hooks/useCountUp';
 
 const ProjectModal = React.lazy(() => import('@/components/work/ProjectModal'));
@@ -21,9 +22,8 @@ interface UnifiedProjectCard {
   role: string;
   categoryBadge: string;
   description: string;
-  diffOld: string;
-  diffNew: string;
-  diffLabel: string;
+  specLabel: string;
+  specValue: string;
   tags: string[];
   image: string;
   original: ProjectGitHub | ProjectConsultant | ProjectUIUX;
@@ -39,64 +39,52 @@ export const WorkPage: React.FC = () => {
   const [selectedDesignProject, setSelectedDesignProject] = useState<ProjectUIUX | null>(null);
 
   // Stats count up
-  const repoCount = useCountUp({ end: 12, duration: 1200 });
-  const shipmentCount = useCountUp({ end: 28, duration: 1400 });
+  const repoCount = useCountUp({ end: projectsGitHub.length, duration: 1200 });
+  const shipmentCount = useCountUp({ end: projectsGitHub.length + projectsConsultant.length + projectsUIUX.length, duration: 1400 });
   const fpsScore = useCountUp({ end: 99, duration: 1500 });
 
   // Unified items
   const allProjects = useMemo<UnifiedProjectCard[]>(() => {
     const list: UnifiedProjectCard[] = [];
 
-    // 1. AI/ML Projects
+    // 1. AI/ML Projects (Verified Real Projects Only)
     projectsGitHub.forEach((p) => {
-      let diffOld = '180ms';
-      let diffNew = '35ms';
-      let diffLabel = 'Inference Latency';
+      let specLabel = 'System Architecture';
+      let specValue = 'Verified Open-Source Production Stack';
 
-      if (p.id === 'isl-recognition') {
-        diffOld = '12 FPS';
-        diffNew = '60 FPS';
-        diffLabel = 'Real-time gesture pipeline';
+      if (p.id === 'quantum-deepfake-detection') {
+        specLabel = 'Deep Learning & Quantum';
+        specValue = 'PennyLane Quantum Circuit + ResNet-18';
+      } else if (p.id === 'mentora-ai') {
+        specLabel = 'Modern Full-Stack AI';
+        specValue = 'Next.js 15, TypeScript & TailwindCSS';
+      } else if (p.id === 'face-attendance') {
+        specLabel = 'Biometric & Relational Backend';
+        specValue = 'Python OpenCV, PHP, MySQL & Face API';
+      } else if (p.id === 'url-safety-checker') {
+        specLabel = 'Web Security & Threat Analysis';
+        specValue = 'Heuristic Phishing & Domain Age Verification';
+      } else if (p.id === '3d-car-running-game') {
+        specLabel = 'WebGL Graphics Performance';
+        specValue = 'Three.js Interactive Runner (60 FPS)';
+      } else if (p.id === 'roadguard-ai') {
+        specLabel = 'Edge Computer Vision';
+        specValue = 'YOLOv8 Edge Road Hazard & Pothole Tracking';
+      } else if (p.id === 'drishtidrive-ai') {
+        specLabel = 'Safety Vision Pipeline';
+        specValue = '68-Point Facial Landmark & Fatigue Alert';
       } else if (p.id === 'self-care-ai') {
-        diffOld = '71.0%';
-        diffNew = '94.6%';
-        diffLabel = 'Grad-CAM screening sensitivity';
-      } else if (p.id.includes('deepfake') || p.id.includes('quantum')) {
-        diffOld = '68.2%';
-        diffNew = '92.4%';
-        diffLabel = 'AUC benchmark on fake media';
-      } else if (p.id.includes('cancer')) {
-        diffOld = '82.0%';
-        diffNew = '96.1%';
-        diffLabel = 'Cytology multi-class recall';
-      } else if (p.id.includes('drowsiness')) {
-        diffOld = '180 ms';
-        diffNew = '28 ms';
-        diffLabel = 'Driver fatigue alert turnaround';
-      } else if (p.id.includes('rag')) {
-        diffOld = '3.8 s';
-        diffNew = '0.6 s';
-        diffLabel = 'Retrieval turnaround time';
-      } else if (p.id.includes('roadguard') || p.id.includes('pothole')) {
-        diffOld = '15 FPS';
-        diffNew = '48 FPS';
-        diffLabel = 'Hazard tracking throughput';
-      } else if (p.id.includes('traffic')) {
-        diffOld = '79.0%';
-        diffNew = '97.8%';
-        diffLabel = 'GTSRB sign classification';
-      } else if (p.id.includes('face')) {
-        diffOld = '1.8 s';
-        diffNew = '0.2 s';
-        diffLabel = 'Face landmark verification';
-      } else if (p.id.includes('measure')) {
-        diffOld = '±12 mm';
-        diffNew = '±1.8 mm';
-        diffLabel = 'Sub-pixel calibration error';
-      } else if (p.id.includes('game') || p.id.includes('3d')) {
-        diffOld = '28 FPS';
-        diffNew = '60 FPS';
-        diffLabel = 'Three.js WebGL rendering';
+        specLabel = 'Full-Stack Wellness';
+        specValue = 'TypeScript Health & Daily Habit Tracking';
+      } else if (p.id === 'student-attendance') {
+        specLabel = 'Campus Portal Architecture';
+        specValue = 'PHP & MySQL Role-Based Attendance System';
+      } else if (p.id === 'mcp-learning-path') {
+        specLabel = 'Agent Protocol Architecture';
+        specValue = 'Model Context Protocol (Python & TypeScript)';
+      } else if (p.caseStudy?.metrics?.[0]) {
+        specLabel = p.caseStudy.metrics[0].label;
+        specValue = p.caseStudy.metrics[0].value;
       }
 
       list.push({
@@ -107,17 +95,20 @@ export const WorkPage: React.FC = () => {
         role: 'AI/ML Engineer',
         categoryBadge: p.category || 'AI / ML',
         description: p.description,
-        diffOld,
-        diffNew,
-        diffLabel,
+        specLabel,
+        specValue,
         tags: p.tags.slice(0, 4),
-        image: p.image || '/assets/projects/isl-recognition.webp',
+        image: p.image || '/assets/projects/quantum-deepfake-detection.webp',
         original: p,
       });
     });
 
     // 2. Consultant Projects
     projectsConsultant.forEach((c) => {
+      const metric = c.metrics && c.metrics[0];
+      const specLabel = metric ? metric.label : 'Production Deliverable';
+      const specValue = metric ? metric.value : (c.scope || 'Commercial Web Architecture');
+
       list.push({
         id: `consultant-${c.id}`,
         kind: 'consultant',
@@ -126,9 +117,8 @@ export const WorkPage: React.FC = () => {
         role: c.engagement?.role || 'Technical Consultant',
         categoryBadge: 'Client Deployment',
         description: (c.deliverables && c.deliverables[0]) || c.summary || c.scope || 'Commercial client web deployment and digital architecture.',
-        diffOld: '4.2 s',
-        diffNew: '0.8 s',
-        diffLabel: c.metrics && c.metrics[0] ? `${c.metrics[0].label} · ${c.metrics[0].value}` : 'Page load time · Lighthouse 98+',
+        specLabel,
+        specValue,
         tags: c.techStack.slice(0, 4),
         image: c.image || '/assets/consultant/studio-squanta.webp',
         original: c,
@@ -145,9 +135,8 @@ export const WorkPage: React.FC = () => {
         role: 'Product Designer',
         categoryBadge: 'Figma System',
         description: u.description || 'High-fidelity design system & interactive component tokens.',
-        diffOld: '7 steps',
-        diffNew: '3 steps',
-        diffLabel: 'User checkout completion flow',
+        specLabel: 'Design Deliverables',
+        specValue: u.screenCount ? `${u.screenCount} Screens & Token System` : 'Figma Design System & Components',
         tags: u.features ? u.features.slice(0, 4) : [u.platform, u.domain, 'Figma', 'Design System'],
         image: u.image || '/assets/uiux/flymitra.webp',
         original: u,
@@ -246,7 +235,7 @@ export const WorkPage: React.FC = () => {
                     : 'bg-white/[0.04] text-typography-headline hover:bg-white/[0.08] border border-white/[0.1]'
                 }`}
               >
-                All 28
+                All {allProjects.length}
               </button>
               <button
                 type="button"
@@ -257,7 +246,7 @@ export const WorkPage: React.FC = () => {
                     : 'bg-white/[0.04] text-typography-headline hover:bg-white/[0.08] border border-white/[0.1]'
                 }`}
               >
-                AI / ML 12
+                AI / ML {projectsGitHub.length}
               </button>
               <button
                 type="button"
@@ -268,7 +257,7 @@ export const WorkPage: React.FC = () => {
                     : 'bg-white/[0.04] text-typography-headline hover:bg-white/[0.08] border border-white/[0.1]'
                 }`}
               >
-                Consultant 11
+                Consultant {projectsConsultant.length}
               </button>
               <button
                 type="button"
@@ -279,7 +268,7 @@ export const WorkPage: React.FC = () => {
                     : 'bg-white/[0.04] text-typography-headline hover:bg-white/[0.08] border border-white/[0.1]'
                 }`}
               >
-                UI / UX 5
+                UI / UX {projectsUIUX.length}
               </button>
             </div>
 
@@ -313,7 +302,7 @@ export const WorkPage: React.FC = () => {
                       className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
                       onError={(e) => {
                         // Fallback image if local webp fails
-                        (e.target as HTMLImageElement).src = '/assets/projects/isl-recognition.webp';
+                        (e.target as HTMLImageElement).src = '/assets/projects/quantum-deepfake-detection.webp';
                       }}
                     />
 
@@ -353,21 +342,20 @@ export const WorkPage: React.FC = () => {
                     {project.description}
                   </p>
 
-                  {/* Diff Metric Comparison Block */}
+                  {/* Technical Specification & Architectural Capability */}
                   <div className="bg-white/[0.02] border border-white/[0.06] rounded-xl p-4 mb-6">
                     <div className="flex flex-wrap items-center justify-between gap-2 mb-1.5">
-                      <div className="flex flex-wrap items-center gap-2 font-mono text-lg sm:text-2xl font-bold tracking-tight min-w-0">
-                        <span className="sh-diff-old truncate">{project.diffOld}</span>
-                        <span className="text-neutral-500 font-normal shrink-0">→</span>
-                        <span className="sh-diff-new truncate">{project.diffNew}</span>
+                      <div className="flex items-center gap-2 font-mono text-sm sm:text-base font-bold text-white tracking-tight min-w-0">
+                        <span className="w-2 h-2 rounded-full bg-[#c6ff00] shrink-0" />
+                        <span className="truncate text-white">{project.specValue}</span>
                       </div>
                       <div className="text-xs font-mono text-[#c6ff00] flex items-center gap-1 group-hover:translate-x-1 transition-transform shrink-0">
                         <span>Open case</span>
                         <ArrowRightIcon className="w-3.5 h-3.5" />
                       </div>
                     </div>
-                    <div className="text-[11px] font-mono text-[#8a928f] tracking-wide">
-                      {project.diffLabel}
+                    <div className="text-[11px] font-mono text-[#8a928f] tracking-wide uppercase">
+                      {project.specLabel}
                     </div>
                   </div>
 
@@ -385,6 +373,52 @@ export const WorkPage: React.FC = () => {
                 </article>
               );
             })}
+
+            {/* Final Grid Card: Visit My GitHub for More */}
+            <a
+              href="https://github.com/swapnil3104"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative bg-gradient-to-br from-[#121815] to-[#0c0f0d] border border-white/[0.12] hover:border-[#c6ff00] rounded-[22px] overflow-hidden p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 hover:shadow-[0_0_35px_rgba(198,255,0,0.2)] hover:-translate-y-1.5"
+            >
+              <div className="relative w-full aspect-[16/10] rounded-[14px] overflow-hidden bg-[#090d0b] border border-white/[0.08] mb-6 flex flex-col items-center justify-center p-6 text-center group-hover:border-[#c6ff00]/40 transition-colors">
+                <div className="w-16 h-16 rounded-2xl bg-[#c6ff00]/10 border border-[#c6ff00]/30 flex items-center justify-center text-[#c6ff00] mb-3 group-hover:scale-110 transition-transform shadow-[0_0_20px_rgba(198,255,0,0.2)]">
+                  <GitHubIcon size={32} />
+                </div>
+                <span className="font-mono text-sm sm:text-base font-bold text-white tracking-tight mb-1">
+                  github.com/swapnil3104
+                </span>
+                <span className="font-mono text-xs text-[#c6ff00]">
+                  15+ Public Repositories · Active Commits
+                </span>
+                <div className="absolute top-3.5 left-3.5 z-10">
+                  <span className="inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-mono font-semibold bg-[#c6ff00] text-black shadow-md">
+                    GitHub Vault
+                  </span>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between text-xs font-mono text-[#8a928f] mb-3">
+                <span>Public Archives</span>
+                <span className="text-[#c6ff00]">Open-Source</span>
+              </div>
+
+              <h3 className="font-display font-bold text-2xl sm:text-3xl text-white mb-3 tracking-tight group-hover:text-[#c6ff00] transition-colors">
+                Visit My GitHub for More
+              </h3>
+
+              <p className="text-xs sm:text-sm text-[#8a928f] leading-relaxed mb-6">
+                Explore the complete public code archives, open-source models, interactive experimental notebooks, and developer tools.
+              </p>
+
+              <div className="pt-4 border-t border-white/[0.06] flex items-center justify-between font-mono text-xs text-[#c6ff00]">
+                <span className="font-semibold flex items-center gap-2">
+                  <span>Visit @swapnil3104 on GitHub</span>
+                  <span className="text-[#8a928f]">· 15+ Repos</span>
+                </span>
+                <ArrowUpRightIcon className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+              </div>
+            </a>
           </div>
         </div>
 

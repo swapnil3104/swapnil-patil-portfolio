@@ -888,6 +888,280 @@ const githubProjects = [
         </g>
       </g>
     `
+  },
+  {
+    id: 'quantum-deepfake-detection',
+    title: 'Quantum-Hybrid Explainable Deepfake Detection',
+    index: '05',
+    category: 'Computer Vision',
+    badge: 'PENNYLANE PQC · XAI GRAD-CAM · 92.4% AUC',
+    svg: `
+      <rect x="0" y="0" width="680" height="465" rx="14" fill="#080c09" stroke="rgba(255,255,255,0.1)" />
+      <g transform="translate(30, 30)">
+        <text x="0" y="15" fill="#c6ff00" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700">
+          // SPATIAL-FREQUENCY ARTIFACT SCAN &amp; GRAD-CAM
+        </text>
+        <g transform="translate(20, 35)">
+          <rect width="260" height="260" rx="12" fill="rgba(255, 255, 255, 0.02)" stroke="#ef4444" stroke-width="2" stroke-dasharray="6 3" />
+          <ellipse cx="130" cy="120" rx="65" ry="85" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" />
+          <ellipse cx="130" cy="155" rx="45" ry="30" fill="rgba(239, 68, 68, 0.35)" filter="url(#neonGlow)" />
+          <ellipse cx="130" cy="155" rx="35" ry="20" fill="rgba(245, 158, 11, 0.45)" />
+          <circle cx="105" cy="105" r="4" fill="#10b981" />
+          <circle cx="155" cy="105" r="4" fill="#10b981" />
+          <text x="15" y="25" fill="#ef4444" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700">
+            [ANOMALY: BOUNDARY BLEND 98.7%]
+          </text>
+          <text x="15" y="245" fill="#8a928f" font-family="'JetBrains Mono', monospace" font-size="10">
+            FFT 2D DCT: High-Freq Cutoff Detected
+          </text>
+        </g>
+        <g transform="translate(310, 35)">
+          <rect width="320" height="260" rx="12" fill="#0d110f" stroke="rgba(255,255,255,0.08)" />
+          <text x="16" y="24" fill="#c6ff00" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700">
+            PENNYLANE VARIATIONAL PQC (8 QUBITS)
+          </text>
+          ${[0, 1, 2, 3].map((q) => `
+            <line x1="20" y1="${55 + q * 48}" x2="300" y2="${55 + q * 48}" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" />
+            <text x="24" y="${52 + q * 48}" fill="#8a928f" font-family="'JetBrains Mono', monospace" font-size="10">|q${q}&#10217;</text>
+            <rect x="65" y="${40 + q * 48}" width="30" height="26" rx="4" fill="#16221c" stroke="#10b981" stroke-width="1.2" />
+            <text x="74" y="${57 + q * 48}" fill="#10b981" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700">H</text>
+            <rect x="120" y="${40 + q * 48}" width="42" height="26" rx="4" fill="#1f2214" stroke="#c6ff00" stroke-width="1.2" />
+            <text x="125" y="${57 + q * 48}" fill="#c6ff00" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="700">Ry(&#952;)</text>
+            <circle cx="195" cy="${55 + q * 48}" r="4" fill="#10b981" />
+            <rect x="250" y="${40 + q * 48}" width="32" height="26" rx="4" fill="#121614" stroke="rgba(255,255,255,0.3)" />
+            <text x="259" y="${57 + q * 48}" fill="#f2f4f3" font-family="'JetBrains Mono', monospace" font-size="10">M</text>
+          `).join('')}
+          <line x1="195" y1="55" x2="195" y2="199" stroke="#10b981" stroke-width="1.5" stroke-dasharray="2 2" />
+        </g>
+      </g>
+      <g transform="translate(20, 390)">
+        <rect width="640" height="55" rx="8" fill="#121714" stroke="rgba(239,68,68,0.4)" />
+        <circle cx="20" cy="27" r="5" fill="#ef4444" />
+        <text x="36" y="24" fill="#ef4444" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700">
+          DEEPFAKE DETECTED // FORENSIC CONFIDENCE: 98.7%
+        </text>
+        <text x="36" y="43" fill="#f2f4f3" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="600">
+          BENCHMARK AUC: 92.4% · LATENCY: 42ms · EXPLAINABILITY: GRAD-CAM + SHAP
+        </text>
+      </g>
+      <g transform="translate(710, 0)">
+        <rect width="390" height="465" rx="12" fill="url(#cardGrad)" stroke="rgba(255,255,255,0.08)" />
+        <text x="24" y="35" fill="#c6ff00" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="600">
+          // QUANTUM ML TELEMETRY
+        </text>
+        <g transform="translate(24, 60)">
+          <rect width="342" height="150" rx="10" fill="#0d110f" stroke="rgba(255,255,255,0.08)" />
+          <text x="20" y="30" fill="#8a928f" font-family="'JetBrains Mono', monospace" font-size="10">CIRCUIT ANSATZ</text>
+          <text x="20" y="55" fill="#f2f4f3" font-family="'JetBrains Mono', monospace" font-size="17" font-weight="700">Strongly Entangling PQC</text>
+          <text x="20" y="85" fill="#10b981" font-family="'JetBrains Mono', monospace" font-size="11">Framework: PennyLane + PyTorch</text>
+          <text x="20" y="110" fill="#8a928f" font-family="'JetBrains Mono', monospace" font-size="11">Cross-Dataset AUC: 92.4% on Celeb-DF</text>
+        </g>
+        <g transform="translate(24, 230)">
+          <rect width="342" height="210" rx="10" fill="#0d110f" stroke="rgba(255,255,255,0.08)" />
+          <text x="20" y="30" fill="#c6ff00" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600">
+            // FORENSIC EXPLAINABILITY
+          </text>
+          <g transform="translate(20, 50)">
+            <text x="0" y="15" fill="#8a928f" font-family="'JetBrains Mono', monospace" font-size="11">Visual Attribution:</text>
+            <text x="170" y="15" fill="#f2f4f3" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700">Grad-CAM Overlay</text>
+            <text x="0" y="45" fill="#8a928f" font-family="'JetBrains Mono', monospace" font-size="11">Frequency Anomaly:</text>
+            <text x="170" y="45" fill="#ef4444" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700">DCT Discontinuity</text>
+            <text x="0" y="75" fill="#8a928f" font-family="'JetBrains Mono', monospace" font-size="11">Court Admissibility:</text>
+            <text x="170" y="75" fill="#10b981" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700">Auditable Log</text>
+            <text x="0" y="105" fill="#8a928f" font-family="'JetBrains Mono', monospace" font-size="11">Qubit Topology:</text>
+            <text x="170" y="105" fill="#c6ff00" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700">8 Qubits All-to-All</text>
+          </g>
+        </g>
+      </g>
+    `
+  },
+  {
+    id: 'mentora-ai',
+    title: 'Mentora — Personal AI Learning Companion',
+    index: '06',
+    category: 'Generative AI / RAG',
+    badge: 'LANGCHAIN · ADAPTIVE KG · ACTIVE RECALL',
+    svg: `
+      <rect x="0" y="0" width="680" height="465" rx="14" fill="#080c09" stroke="rgba(255,255,255,0.1)" />
+      <g transform="translate(30, 30)">
+        <text x="0" y="15" fill="#c6ff00" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700">
+          // ADAPTIVE CONCEPT GRAPH &amp; KNOWLEDGE RETRIEVAL
+        </text>
+        <g transform="translate(10, 40)">
+          <rect x="20" y="30" width="160" height="50" rx="8" fill="#121815" stroke="#10b981" stroke-width="1.5" />
+          <text x="32" y="52" fill="#f2f4f3" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700">Attention Mechanism</text>
+          <text x="32" y="68" fill="#10b981" font-family="'JetBrains Mono', monospace" font-size="9.5">Mastery: 96% · Solid</text>
+
+          <line x1="180" y1="55" x2="240" y2="95" stroke="#c6ff00" stroke-width="1.5" stroke-dasharray="3 2" />
+
+          <rect x="240" y="70" width="160" height="50" rx="8" fill="#18201b" stroke="#c6ff00" stroke-width="2" />
+          <text x="252" y="92" fill="#c6ff00" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700">Transformer Blocks</text>
+          <text x="252" y="108" fill="#8a928f" font-family="'JetBrains Mono', monospace" font-size="9.5">Current Focus · Quiz Due</text>
+
+          <line x1="180" y1="165" x2="240" y2="105" stroke="#10b981" stroke-width="1.5" stroke-dasharray="3 2" />
+
+          <rect x="20" y="140" width="160" height="50" rx="8" fill="#121815" stroke="#10b981" stroke-width="1.5" />
+          <text x="32" y="162" fill="#f2f4f3" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700">Positional Encoding</text>
+          <text x="32" y="178" fill="#10b981" font-family="'JetBrains Mono', monospace" font-size="9.5">Mastery: 92% · Spaced</text>
+
+          <line x1="400" y1="95" x2="450" y2="95" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" />
+
+          <rect x="450" y="70" width="160" height="50" rx="8" fill="#0d110f" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+          <text x="462" y="92" fill="#8a928f" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600">LoRA / QLoRA</text>
+          <text x="462" y="108" fill="#4f5854" font-family="'JetBrains Mono', monospace" font-size="9.5">Locked · Prereq Pending</text>
+        </g>
+        <g transform="translate(10, 260)">
+          <rect width="620" height="75" rx="8" fill="#111613" stroke="rgba(255,255,255,0.08)" />
+          <text x="20" y="24" fill="#c6ff00" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700">
+            AI MENTOR RESPONSE [STREAMING // 380MS]:
+          </text>
+          <text x="20" y="44" fill="#f2f4f3" font-family="'JetBrains Mono', monospace" font-size="11">
+            &quot;In self-attention, queries and keys compute dot-product affinities to weigh value vectors...&quot;
+          </text>
+          <text x="20" y="62" fill="#8a928f" font-family="'JetBrains Mono', monospace" font-size="10">
+            Source Grounding: Attention Is All You Need (Vaswani et al., §3.2) [Confidence 99.1%]
+          </text>
+        </g>
+      </g>
+      <g transform="translate(20, 390)">
+        <rect width="640" height="55" rx="8" fill="#121714" stroke="rgba(198,255,0,0.3)" />
+        <circle cx="20" cy="27" r="5" fill="#c6ff00" />
+        <text x="36" y="24" fill="#c6ff00" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700">
+          MENTORA ENGINE // ACTIVE COMPANION SESSION
+        </text>
+        <text x="36" y="43" fill="#f2f4f3" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="600">
+          ADAPTIVE SYLLABUS: ACTIVE · ACTIVE RECALL ACCURACY: 94.8% · LATENCY: &lt;380ms
+        </text>
+      </g>
+      <g transform="translate(710, 0)">
+        <rect width="390" height="465" rx="12" fill="url(#cardGrad)" stroke="rgba(255,255,255,0.08)" />
+        <text x="24" y="35" fill="#c6ff00" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="600">
+          // COMPANION METRICS
+        </text>
+        <g transform="translate(24, 60)">
+          <rect width="342" height="150" rx="10" fill="#0d110f" stroke="rgba(255,255,255,0.08)" />
+          <text x="20" y="30" fill="#8a928f" font-family="'JetBrains Mono', monospace" font-size="10">KNOWLEDGE VECTOR STORE</text>
+          <text x="20" y="55" fill="#f2f4f3" font-family="'JetBrains Mono', monospace" font-size="17" font-weight="700">ChromaDB Hierarchical Graph</text>
+          <text x="20" y="85" fill="#10b981" font-family="'JetBrains Mono', monospace" font-size="11">Zero-Hallucination Rate: &lt; 1.2%</text>
+          <text x="20" y="110" fill="#8a928f" font-family="'JetBrains Mono', monospace" font-size="11">Spaced Repetition: SuperMemo SM-2</text>
+        </g>
+        <g transform="translate(24, 230)">
+          <rect width="342" height="210" rx="10" fill="#0d110f" stroke="rgba(255,255,255,0.08)" />
+          <text x="20" y="30" fill="#c6ff00" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600">
+            // INTERACTIVE RECALL
+          </text>
+          <g transform="translate(20, 50)">
+            <text x="0" y="15" fill="#8a928f" font-family="'JetBrains Mono', monospace" font-size="11">Curriculum Mode:</text>
+            <text x="170" y="15" fill="#f2f4f3" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700">Adaptive Dynamic</text>
+            <text x="0" y="45" fill="#8a928f" font-family="'JetBrains Mono', monospace" font-size="11">Flashcard Scheduler:</text>
+            <text x="170" y="45" fill="#10b981" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700">SM-2 Algorithm</text>
+            <text x="0" y="75" fill="#8a928f" font-family="'JetBrains Mono', monospace" font-size="11">Streaming Response:</text>
+            <text x="170" y="75" fill="#c6ff00" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700">&lt; 380ms TTFT</text>
+            <text x="0" y="105" fill="#8a928f" font-family="'JetBrains Mono', monospace" font-size="11">Concept Coverage:</text>
+            <text x="170" y="105" fill="#f2f4f3" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700">50+ Domain Nodes</text>
+          </g>
+        </g>
+      </g>
+    `
+  },
+  {
+    id: 'url-safety-checker',
+    title: 'URL Safety Checker & Malicious Link Detector',
+    index: '08',
+    category: 'Automation / Tools',
+    badge: 'ML ENSEMBLE · PHISHING SCAN · <120MS',
+    svg: `
+      <rect x="0" y="0" width="680" height="465" rx="14" fill="#080c09" stroke="rgba(255,255,255,0.1)" />
+      <g transform="translate(30, 30)">
+        <text x="0" y="15" fill="#c6ff00" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700">
+          // URL THREAT AUDIT &amp; HEURISTIC FEATURE EXTRACTION
+        </text>
+        <g transform="translate(10, 35)">
+          <rect width="620" height="48" rx="8" fill="#121714" stroke="rgba(255,255,255,0.12)" />
+          <text x="16" y="29" fill="#ef4444" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="600">
+            https://secure-login.paypa1-account.xyz/update-credential
+          </text>
+          <rect x="520" y="10" width="85" height="28" rx="5" fill="#ef4444" />
+          <text x="532" y="28" fill="#ffffff" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700">
+            BLOCKED
+          </text>
+        </g>
+        <g transform="translate(10, 105)">
+          <rect x="0" y="0" width="145" height="110" rx="8" fill="#0d110f" stroke="rgba(239,68,68,0.4)" />
+          <text x="12" y="24" fill="#ef4444" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700">HOMOGRAPH SPOOF</text>
+          <text x="12" y="55" fill="#f2f4f3" font-family="'JetBrains Mono', monospace" font-size="14" font-weight="700">paypa1 (1!=l)</text>
+          <text x="12" y="85" fill="#ef4444" font-family="'JetBrains Mono', monospace" font-size="9.5">Flag: Impersonation</text>
+
+          <rect x="158" y="0" width="145" height="110" rx="8" fill="#0d110f" stroke="rgba(239,68,68,0.4)" />
+          <text x="170" y="24" fill="#ef4444" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700">DOMAIN AGE</text>
+          <text x="170" y="55" fill="#f2f4f3" font-family="'JetBrains Mono', monospace" font-size="14" font-weight="700">2 Days Old</text>
+          <text x="170" y="85" fill="#ef4444" font-family="'JetBrains Mono', monospace" font-size="9.5">Flag: Fresh Domain</text>
+
+          <rect x="316" y="0" width="145" height="110" rx="8" fill="#0d110f" stroke="rgba(245,158,11,0.4)" />
+          <text x="328" y="24" fill="#f59e0b" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700">SHANNON ENTROPY</text>
+          <text x="328" y="55" fill="#f2f4f3" font-family="'JetBrains Mono', monospace" font-size="14" font-weight="700">4.82 bits</text>
+          <text x="328" y="85" fill="#f59e0b" font-family="'JetBrains Mono', monospace" font-size="9.5">Flag: High Randomness</text>
+
+          <rect x="474" y="0" width="145" height="110" rx="8" fill="#0d110f" stroke="rgba(239,68,68,0.4)" />
+          <text x="486" y="24" fill="#ef4444" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700">REDIRECT HOPS</text>
+          <text x="486" y="55" fill="#f2f4f3" font-family="'JetBrains Mono', monospace" font-size="14" font-weight="700">3 Hops (Cloaked)</text>
+          <text x="486" y="85" fill="#ef4444" font-family="'JetBrains Mono', monospace" font-size="9.5">Flag: Obfuscated Hop</text>
+        </g>
+        <g transform="translate(10, 235)">
+          <rect width="620" height="100" rx="8" fill="#111613" stroke="rgba(255,255,255,0.08)" />
+          <text x="20" y="28" fill="#c6ff00" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700">
+            RISK ASSESSMENT CLASSIFIER // RANDOM FOREST + GRADIENT BOOSTING
+          </text>
+          <rect x="20" y="44" width="580" height="16" rx="8" fill="#1f2420" />
+          <rect x="20" y="44" width="550" height="16" rx="8" fill="#ef4444" />
+          <text x="20" y="82" fill="#ef4444" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="700">
+            THREAT SCORE: 98/100 (HIGH RISK PHISHING ATTACK)
+          </text>
+          <text x="420" y="82" fill="#10b981" font-family="'JetBrains Mono', monospace" font-size="11">
+            Scan turnaround: 115ms
+          </text>
+        </g>
+      </g>
+      <g transform="translate(20, 390)">
+        <rect width="640" height="55" rx="8" fill="#121714" stroke="rgba(239,68,68,0.4)" />
+        <circle cx="20" cy="27" r="5" fill="#ef4444" />
+        <text x="36" y="24" fill="#ef4444" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700">
+          MALICIOUS URL INTERCEPTED // PHISHING DEFENSE ACTIVE
+        </text>
+        <text x="36" y="43" fill="#f2f4f3" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="600">
+          ACCURACY: 97.2% · FEATURES: 32 SIGNALS · INFERENCE: &lt;120ms · ZERO-DAY DEFENSE
+        </text>
+      </g>
+      <g transform="translate(710, 0)">
+        <rect width="390" height="465" rx="12" fill="url(#cardGrad)" stroke="rgba(255,255,255,0.08)" />
+        <text x="24" y="35" fill="#c6ff00" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="600">
+          // DEFENSE TELEMETRY
+        </text>
+        <g transform="translate(24, 60)">
+          <rect width="342" height="150" rx="10" fill="#0d110f" stroke="rgba(255,255,255,0.08)" />
+          <text x="20" y="30" fill="#8a928f" font-family="'JetBrains Mono', monospace" font-size="10">ML ENSEMBLE</text>
+          <text x="20" y="55" fill="#f2f4f3" font-family="'JetBrains Mono', monospace" font-size="17" font-weight="700">Random Forest + GBDT</text>
+          <text x="20" y="85" fill="#10b981" font-family="'JetBrains Mono', monospace" font-size="11">Dataset: PhishTank &amp; Alexa Top 100k</text>
+          <text x="20" y="110" fill="#8a928f" font-family="'JetBrains Mono', monospace" font-size="11">False Positive Rate: &lt; 1.4%</text>
+        </g>
+        <g transform="translate(24, 230)">
+          <rect width="342" height="210" rx="10" fill="#0d110f" stroke="rgba(255,255,255,0.08)" />
+          <text x="20" y="30" fill="#c6ff00" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600">
+            // DETECTION VECTORS
+          </text>
+          <g transform="translate(20, 50)">
+            <text x="0" y="15" fill="#8a928f" font-family="'JetBrains Mono', monospace" font-size="11">Lexical Features:</text>
+            <text x="170" y="15" fill="#f2f4f3" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700">18 Tokens Analysed</text>
+            <text x="0" y="45" fill="#8a928f" font-family="'JetBrains Mono', monospace" font-size="11">WHOIS Reputation:</text>
+            <text x="170" y="45" fill="#10b981" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700">Live DNS Resolution</text>
+            <text x="0" y="75" fill="#8a928f" font-family="'JetBrains Mono', monospace" font-size="11">SSL Security Audit:</text>
+            <text x="170" y="75" fill="#ef4444" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700">Untrusted / Invalid</text>
+            <text x="0" y="105" fill="#8a928f" font-family="'JetBrains Mono', monospace" font-size="11">Audit Throughput:</text>
+            <text x="170" y="105" fill="#c6ff00" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700">&lt; 120ms Latency</text>
+          </g>
+        </g>
+      </g>
+    `
   }
 ];
 

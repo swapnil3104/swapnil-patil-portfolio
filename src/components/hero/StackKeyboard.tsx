@@ -21,7 +21,7 @@ const STACK_DATA: KeycapData[] = [
     experience: '4+ Years',
     frequency: 'Daily Production',
     role: 'Primary Language for AI/ML, Computer Vision & Backends',
-    deployedIn: ['ISLR Studio', 'DrishtiDrive AI', 'RoadGuard AI', 'FastAPI Microservices'],
+    deployedIn: ['Quantum Deepfake Detection', 'DrishtiDrive AI', 'RoadGuard AI', 'Face Attendance System'],
     philosophy: 'Clean vectorization with NumPy, neural modeling in PyTorch, and asynchronous API serving.',
   },
   {
@@ -73,7 +73,7 @@ const STACK_DATA: KeycapData[] = [
     experience: '3+ Years',
     frequency: 'Production',
     role: 'CNN Training, Sequence Classification & Keras Pipelines',
-    deployedIn: ['ISLR Studio', 'Traffic Sign Recognition'],
+    deployedIn: ['Quantum Deepfake Detection', 'Mentora AI Backend'],
     philosophy: 'Robust data pipeline mapping, model checkpointing, and edge quantization.',
   },
   {
@@ -93,7 +93,7 @@ const STACK_DATA: KeycapData[] = [
     experience: '3+ Years',
     frequency: 'Daily Production',
     role: 'High-Throughput Asynchronous REST & Inference APIs',
-    deployedIn: ['RoadGuard AI', 'RAG Pipelines', 'Vision Endpoints'],
+    deployedIn: ['RoadGuard AI', 'URL Safety Checker', 'Vision Endpoints'],
     philosophy: 'Asynchronous event loops, Pydantic type validation, and automatic OpenAPI documentation.',
   },
 
@@ -105,7 +105,7 @@ const STACK_DATA: KeycapData[] = [
     experience: '3+ Years',
     frequency: 'Daily Production',
     role: 'Spatial Filtering, Contours & Image Processing Pipelines',
-    deployedIn: ['VisionMeasure', 'Drowsiness Detection', 'Face Recognition'],
+    deployedIn: ['Face Attendance System', 'DrishtiDrive AI', 'RoadGuard AI'],
     philosophy: 'Matrix transformations, morphological operations, and real-time video buffer handling.',
   },
   {
@@ -115,7 +115,7 @@ const STACK_DATA: KeycapData[] = [
     experience: '2+ Years',
     frequency: 'Production',
     role: 'Edge 3D Hand, Pose & Facial Landmark Tracking',
-    deployedIn: ['ISLR Studio', 'Gesture Interactive UIs'],
+    deployedIn: ['DrishtiDrive AI', 'Face Attendance System'],
     philosophy: 'Coordinate-space 3D geometry extracting 21 keypoints per hand at 30+ FPS on CPU.',
   },
   {
@@ -125,7 +125,7 @@ const STACK_DATA: KeycapData[] = [
     experience: '2+ Years',
     frequency: 'Active R&D',
     role: 'RAG Retrieval, Vector Embeddings & Agent Tool Calling',
-    deployedIn: ['RAG-Engineering', 'MCP Server Implementations'],
+    deployedIn: ['Mentora AI Companion', 'Model Context Protocol Path'],
     philosophy: 'Grounding LLMs with hybrid semantic vector indexing and verifiable context sources.',
   },
   {
@@ -135,7 +135,7 @@ const STACK_DATA: KeycapData[] = [
     experience: '2+ Years',
     frequency: 'Production',
     role: 'Real-Time Object Detection & Spatial Zoning',
-    deployedIn: ['RoadGuard AI Potholes', 'YOLO26 Restaurant Occupancy'],
+    deployedIn: ['RoadGuard AI Potholes', 'Road Safety CV'],
     philosophy: 'Single-stage bounding-box regression, anchor-free detection, and high-speed edge inferencing.',
   },
 

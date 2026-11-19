@@ -27,71 +27,64 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ projectId, categor
 
 function renderVisual(id: string, category: string) {
   switch (id) {
-    case 'isl-recognition':
+    case 'student-attendance':
       return (
         <svg viewBox="0 0 360 200" className="w-full h-full text-typography-body">
-          {/* Hand Contour & 21-point Keypoint Skeleton */}
-          <g transform="translate(40, 20)">
-            {/* Hand Bounding Box */}
-            <rect
-              x="60"
-              y="10"
-              width="160"
-              height="140"
-              rx="6"
-              fill="rgba(16, 185, 129, 0.04)"
-              stroke="rgba(16, 185, 129, 0.3)"
-              strokeDasharray="4 3"
-            />
-            <text x="66" y="24" fill="#10B981" fontSize="9" fontFamily="monospace">
-              [TRACK_ID: HAND_R] 98.4%
+          {/* Institutional Portal Frame */}
+          <g transform="translate(25, 20)">
+            <rect x="0" y="0" width="310" height="120" rx="8" fill="#0d110f" stroke="rgba(255,255,255,0.08)" />
+            {/* Header bar */}
+            <rect x="0" y="0" width="310" height="28" rx="8" fill="rgba(198,255,0,0.08)" />
+            <text x="12" y="18" fill="#c6ff00" fontSize="10" fontFamily="monospace" fontWeight="bold">
+              FACULTY ATTENDANCE ROSTER &middot; CS-2024
+            </text>
+            <text x="240" y="18" fill="#8a928f" fontSize="9" fontFamily="monospace">
+              PHP/MySQL
             </text>
 
-            {/* Skeleton Bone Links */}
-            <path
-              d="M140,135 L140,110 L115,85 L105,70 L95,65
-                 M140,110 L125,75 L120,50 L115,35
-                 M140,110 L140,65 L140,40 L140,25
-                 M140,110 L155,70 L160,50 L165,35
-                 M140,110 L170,80 L175,65 L180,55"
-              fill="none"
-              stroke="rgba(198, 255, 0, 0.6)"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
+            {/* Roster Table Rows */}
+            <g transform="translate(10, 36)">
+              <rect x="0" y="0" width="290" height="22" rx="3" fill="#131916" stroke="rgba(255,255,255,0.04)" />
+              <text x="8" y="15" fill="#f2f4f3" fontSize="9.5" fontFamily="monospace">
+                #CS101 &middot; Aarav Sharma
+              </text>
+              <rect x="220" y="3" width="60" height="16" rx="3" fill="rgba(16,185,129,0.2)" />
+              <text x="232" y="15" fill="#10B981" fontSize="9" fontFamily="monospace" fontWeight="bold">
+                PRESENT
+              </text>
+            </g>
 
-            {/* 21 Keypoint Landmark Dots */}
-            {[
-              [140, 135], [140, 110],
-              [115, 85], [105, 70], [95, 65],
-              [125, 75], [120, 50], [115, 35],
-              [140, 65], [140, 40], [140, 25],
-              [155, 70], [160, 50], [165, 35],
-              [170, 80], [175, 65], [180, 55],
-            ].map(([cx, cy], i) => (
-              <circle
-                key={i}
-                cx={cx}
-                cy={cy}
-                r="3.5"
-                fill="#10B981"
-                stroke="#0c0e0d"
-                strokeWidth="1.5"
-                className="animate-pulse"
-              />
-            ))}
+            <g transform="translate(10, 62)">
+              <rect x="0" y="0" width="290" height="22" rx="3" fill="#131916" stroke="rgba(255,255,255,0.04)" />
+              <text x="8" y="15" fill="#f2f4f3" fontSize="9.5" fontFamily="monospace">
+                #CS102 &middot; Priya Patil
+              </text>
+              <rect x="220" y="3" width="60" height="16" rx="3" fill="rgba(16,185,129,0.2)" />
+              <text x="232" y="15" fill="#10B981" fontSize="9" fontFamily="monospace" fontWeight="bold">
+                PRESENT
+              </text>
+            </g>
+
+            <g transform="translate(10, 88)">
+              <rect x="0" y="0" width="290" height="22" rx="3" fill="#131916" stroke="rgba(255,255,255,0.04)" />
+              <text x="8" y="15" fill="#f2f4f3" fontSize="9.5" fontFamily="monospace">
+                #CS103 &middot; Rohan Deshmukh
+              </text>
+              <rect x="220" y="3" width="60" height="16" rx="3" fill="rgba(239,68,68,0.2)" />
+              <text x="235" y="15" fill="#EF4444" fontSize="9" fontFamily="monospace" fontWeight="bold">
+                ABSENT
+              </text>
+            </g>
           </g>
 
-          {/* Real-time Gesture Prediction Overlay */}
-          <g transform="translate(20, 162)">
-            <rect x="0" y="0" width="320" height="26" rx="4" fill="#111413" stroke="rgba(255,255,255,0.1)" />
-            <circle cx="12" cy="13" r="4" fill="#10B981" />
-            <text x="24" y="16" fill="#F4F4F5" fontSize="10.5" fontFamily="monospace" fontWeight="600">
-              SYNTHESIZED: &quot;NAMASTE / WELCOME&quot;
+          {/* Telemetry Footer */}
+          <g transform="translate(25, 150)">
+            <rect x="0" y="0" width="310" height="34" rx="6" fill="#111413" stroke="rgba(255,255,255,0.08)" />
+            <text x="12" y="15" fill="#10B981" fontSize="9.5" fontFamily="monospace" fontWeight="bold">
+              ROLE ACCESS: FACULTY &middot; STUDENT PORTAL
             </text>
-            <text x="260" y="16" fill="#10B981" fontSize="9.5" fontFamily="monospace">
-              32 FPS · 42ms
+            <text x="12" y="27" fill="#8a928f" fontSize="8.5" fontFamily="monospace">
+              Relational attendance records with MySQL persistence &middot; PHP backend
             </text>
           </g>
         </svg>
@@ -455,29 +448,47 @@ function renderVisual(id: string, category: string) {
     case 'self-care-ai':
       return (
         <svg viewBox="0 0 360 200" className="w-full h-full text-typography-body">
-          {/* Medical Viewfinder Circle */}
-          <circle cx="180" cy="80" r="60" fill="none" stroke="rgba(16, 185, 129, 0.4)" strokeWidth="1.5" />
-          <circle cx="180" cy="80" r="45" fill="none" stroke="rgba(198, 255, 0, 0.2)" strokeDasharray="4 4" />
-          <circle cx="180" cy="80" r="4" fill="#10B981" />
-
-          {/* Crosshairs & Reticle */}
-          <line x1="180" y1="10" x2="180" y2="30" stroke="#10B981" strokeWidth="1.5" />
-          <line x1="180" y1="130" x2="180" y2="150" stroke="#10B981" strokeWidth="1.5" />
-          <line x1="110" y1="80" x2="130" y2="80" stroke="#10B981" strokeWidth="1.5" />
-          <line x1="230" y1="80" x2="250" y2="80" stroke="#10B981" strokeWidth="1.5" />
-
-          {/* Diagnostic Grad-CAM Heat Overlay */}
-          <ellipse cx="195" cy="72" rx="20" ry="15" fill="rgba(245, 158, 11, 0.25)" stroke="#F59E0B" strokeDasharray="2 2" />
-          <text x="220" y="60" fill="#F59E0B" fontSize="8" fontFamily="monospace">Grad-CAM ROI</text>
-
-          {/* Diagnostic Rating Card */}
-          <g transform="translate(20, 145)">
-            <rect x="0" y="0" width="320" height="42" rx="4" fill="#111413" stroke="rgba(255,255,255,0.1)" />
-            <text x="12" y="16" fill="#10B981" fontSize="9.5" fontFamily="monospace" fontWeight="bold">
-              PRELIMINARY RISK: LOW (92.3% CLINICAL CORRELATION)
+          {/* Habit Tracker Board */}
+          <g transform="translate(25, 20)">
+            <rect x="0" y="0" width="310" height="120" rx="8" fill="#0d110f" stroke="rgba(255,255,255,0.08)" />
+            <rect x="0" y="0" width="310" height="28" rx="8" fill="rgba(198,255,0,0.08)" />
+            <text x="12" y="18" fill="#c6ff00" fontSize="10" fontFamily="monospace" fontWeight="bold">
+              DAILY WELLNESS &middot; HABIT METRICS
             </text>
-            <text x="12" y="30" fill="#8a928f" fontSize="8.5" fontFamily="monospace">
-              Automated image sharpness verification · Grad-CAM Explainable AI
+            <text x="235" y="18" fill="#8a928f" fontSize="9" fontFamily="monospace">
+              TypeScript
+            </text>
+
+            {/* Habit Rows */}
+            <g transform="translate(12, 38)">
+              <text x="0" y="12" fill="#f2f4f3" fontSize="9" fontFamily="monospace">Hydration (2.5L Target)</text>
+              <rect x="135" y="3" width="150" height="10" rx="5" fill="rgba(255,255,255,0.06)" />
+              <rect x="135" y="3" width="125" height="10" rx="5" fill="#10B981" />
+              <text x="135" y="24" fill="#8a928f" fontSize="8" fontFamily="monospace">83% completed</text>
+            </g>
+
+            <g transform="translate(12, 68)">
+              <text x="0" y="12" fill="#f2f4f3" fontSize="9" fontFamily="monospace">Sleep Routine (8h Target)</text>
+              <rect x="135" y="3" width="150" height="10" rx="5" fill="rgba(255,255,255,0.06)" />
+              <rect x="135" y="3" width="140" height="10" rx="5" fill="#c6ff00" />
+              <text x="135" y="24" fill="#8a928f" fontSize="8" fontFamily="monospace">92% completed</text>
+            </g>
+
+            <g transform="translate(12, 98)">
+              <text x="0" y="12" fill="#f2f4f3" fontSize="9" fontFamily="monospace">Active Mindfulness</text>
+              <rect x="135" y="3" width="150" height="10" rx="5" fill="rgba(255,255,255,0.06)" />
+              <rect x="135" y="3" width="150" height="10" rx="5" fill="#3b82f6" />
+            </g>
+          </g>
+
+          {/* Telemetry Footer */}
+          <g transform="translate(25, 150)">
+            <rect x="0" y="0" width="310" height="34" rx="6" fill="#111413" stroke="rgba(255,255,255,0.08)" />
+            <text x="12" y="15" fill="#10B981" fontSize="9.5" fontFamily="monospace" fontWeight="bold">
+              WELLNESS &middot; HABIT RETENTION &middot; LOCAL PERSISTENCE
+            </text>
+            <text x="12" y="27" fill="#8a928f" fontSize="8.5" fontFamily="monospace">
+              Type-safe state management &middot; Daily streak analytics
             </text>
           </g>
         </svg>
@@ -667,6 +678,151 @@ function renderVisual(id: string, category: string) {
             </text>
             <text x="12" y="30" fill="#8a928f" fontSize="8.5" fontFamily="monospace">
               09:15:22 IST · Anti-spoofing liveness passed · DB logged
+            </text>
+          </g>
+        </svg>
+      );
+
+    case 'quantum-deepfake-detection':
+      return (
+        <svg viewBox="0 0 360 200" className="w-full h-full text-typography-body">
+          {/* Face scanner with Grad-CAM and Quantum PQC overlay */}
+          <g transform="translate(20, 20)">
+            {/* Manipulated Face Region */}
+            <rect x="10" y="10" width="120" height="110" rx="6" fill="rgba(239, 68, 68, 0.05)" stroke="#ef4444" strokeWidth="1.5" strokeDasharray="4 2" />
+            <ellipse cx="70" cy="65" rx="36" ry="42" fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth="1" />
+            {/* Grad-CAM Heatmap overlay */}
+            <ellipse cx="70" cy="80" rx="24" ry="16" fill="rgba(239, 68, 68, 0.45)" />
+            <circle cx="56" cy="55" r="3" fill="#10B981" />
+            <circle cx="84" cy="55" r="3" fill="#10B981" />
+            <text x="16" y="24" fill="#ef4444" fontSize="8" fontFamily="monospace" fontWeight="bold">
+              [DEEPFAKE ANOMALY]
+            </text>
+
+            {/* Quantum PQC Circuit Visualization */}
+            <g transform="translate(150, 10)">
+              <rect x="0" y="0" width="160" height="110" rx="6" fill="#0c100e" stroke="rgba(255,255,255,0.1)" />
+              <text x="10" y="18" fill="#c6ff00" fontSize="8" fontFamily="monospace" fontWeight="bold">
+                PENNYLANE PQC ANSATZ
+              </text>
+              {[0, 1, 2, 3].map((q) => (
+                <g key={q} transform={`translate(10, ${32 + q * 20})`}>
+                  <line x1="0" y1="0" x2="140" y2="0" stroke="rgba(255,255,255,0.2)" strokeWidth="1" />
+                  <text x="-4" y="3" fill="#8a928f" fontSize="7.5" fontFamily="monospace">q{q}</text>
+                  <rect x="25" y="-7" width="16" height="14" rx="2" fill="#16221c" stroke="#10b981" strokeWidth="1" />
+                  <text x="30" y="3" fill="#10b981" fontSize="7" fontFamily="monospace">H</text>
+                  <rect x="60" y="-7" width="22" height="14" rx="2" fill="#1f2214" stroke="#c6ff00" strokeWidth="1" />
+                  <text x="63" y="3" fill="#c6ff00" fontSize="6.5" fontFamily="monospace">Ry</text>
+                  <circle cx="100" cy="0" r="2.5" fill="#10b981" />
+                  <rect x="120" y="-7" width="16" height="14" rx="2" fill="#121614" stroke="rgba(255,255,255,0.3)" />
+                  <text x="124" y="3" fill="#f2f4f3" fontSize="7" fontFamily="monospace">M</text>
+                </g>
+              ))}
+              <line x1="110" y1="32" x2="110" y2="92" stroke="#10b981" strokeWidth="1" strokeDasharray="2 2" />
+            </g>
+          </g>
+
+          {/* Status Bar */}
+          <g transform="translate(20, 145)">
+            <rect x="0" y="0" width="320" height="42" rx="4" fill="#111413" stroke="rgba(239,68,68,0.3)" />
+            <text x="12" y="16" fill="#ef4444" fontSize="9.5" fontFamily="monospace" fontWeight="bold">
+              BENCHMARK AUC: 92.4% · LATENCY: 42ms
+            </text>
+            <text x="12" y="30" fill="#8a928f" fontSize="8.5" fontFamily="monospace">
+              XAI Grad-CAM visual heatmaps · 8-Qubit Entangled Ansatz
+            </text>
+          </g>
+        </svg>
+      );
+
+    case 'mentora-ai':
+      return (
+        <svg viewBox="0 0 360 200" className="w-full h-full text-typography-body">
+          {/* Concept Graph and Interactive Dialogue */}
+          <g transform="translate(20, 15)">
+            {/* Concept Tree nodes */}
+            <g transform="translate(10, 10)">
+              <rect x="0" y="5" width="85" height="30" rx="4" fill="#121815" stroke="#10b981" strokeWidth="1" />
+              <text x="6" y="21" fill="#f2f4f3" fontSize="7.5" fontFamily="monospace" fontWeight="bold">Attention</text>
+              <text x="6" y="30" fill="#10b981" fontSize="6.5" fontFamily="monospace">Mastery 96%</text>
+
+              <line x1="85" y1="20" x2="115" y2="40" stroke="#c6ff00" strokeWidth="1" strokeDasharray="2 2" />
+
+              <rect x="115" y="25" width="90" height="30" rx="4" fill="#18201b" stroke="#c6ff00" strokeWidth="1.5" />
+              <text x="121" y="41" fill="#c6ff00" fontSize="7.5" fontFamily="monospace" fontWeight="bold">Transformers</text>
+              <text x="121" y="50" fill="#8a928f" fontSize="6.5" fontFamily="monospace">Active Focus</text>
+
+              <line x1="85" y1="80" x2="115" y2="45" stroke="#10b981" strokeWidth="1" strokeDasharray="2 2" />
+
+              <rect x="0" y="65" width="85" height="30" rx="4" fill="#121815" stroke="#10b981" strokeWidth="1" />
+              <text x="6" y="81" fill="#f2f4f3" fontSize="7.5" fontFamily="monospace" fontWeight="bold">Pos. Encoding</text>
+              <text x="6" y="90" fill="#10b981" fontSize="6.5" fontFamily="monospace">Mastery 92%</text>
+
+              <line x1="205" y1="40" x2="235" y2="40" stroke="rgba(255,255,255,0.2)" strokeWidth="1" />
+
+              <rect x="235" y="25" width="85" height="30" rx="4" fill="#0d110f" stroke="rgba(255,255,255,0.2)" strokeWidth="1" />
+              <text x="241" y="41" fill="#8a928f" fontSize="7.5" fontFamily="monospace">LoRA / QLoRA</text>
+              <text x="241" y="50" fill="#4f5854" fontSize="6.5" fontFamily="monospace">Next Chapter</text>
+            </g>
+          </g>
+
+          {/* Chat Stream Bubble */}
+          <g transform="translate(20, 125)">
+            <rect x="0" y="0" width="320" height="62" rx="4" fill="#111413" stroke="rgba(198,255,0,0.2)" />
+            <text x="12" y="16" fill="#c6ff00" fontSize="9" fontFamily="monospace" fontWeight="bold">
+              AI MENTOR RESPONSE [STREAMING 380MS]:
+            </text>
+            <text x="12" y="32" fill="#f2f4f3" fontSize="8.5" fontFamily="monospace">
+              &quot;Self-attention computes dot-product scores between Q and K...&quot;
+            </text>
+            <text x="12" y="48" fill="#8a928f" fontSize="8" fontFamily="monospace">
+              Citation: Attention is All You Need §3.2 · Recall Accuracy: 94.8%
+            </text>
+          </g>
+        </svg>
+      );
+
+    case 'url-safety-checker':
+      return (
+        <svg viewBox="0 0 360 200" className="w-full h-full text-typography-body">
+          {/* URL Threat Inspector and Risk Bar */}
+          <g transform="translate(20, 15)">
+            {/* Input URL display */}
+            <rect x="0" y="0" width="320" height="30" rx="4" fill="#121714" stroke="rgba(255,255,255,0.12)" />
+            <text x="10" y="18" fill="#ef4444" fontSize="8.5" fontFamily="monospace">
+              https://secure-login.paypa1-verify.xyz
+            </text>
+            <rect x="260" y="6" width="50" height="18" rx="3" fill="#ef4444" />
+            <text x="267" y="18" fill="#fff" fontSize="8" fontFamily="monospace" fontWeight="bold">
+              BLOCKED
+            </text>
+
+            {/* Heuristic vectors */}
+            <g transform="translate(0, 40)">
+              <rect x="0" y="0" width="100" height="50" rx="4" fill="#0d110f" stroke="rgba(239,68,68,0.4)" />
+              <text x="8" y="18" fill="#ef4444" fontSize="7.5" fontFamily="monospace" fontWeight="bold">HOMOGRAPH</text>
+              <text x="8" y="34" fill="#f2f4f3" fontSize="8" fontFamily="monospace">paypa1 (1!=l)</text>
+
+              <rect x="110" y="0" width="100" height="50" rx="4" fill="#0d110f" stroke="rgba(239,68,68,0.4)" />
+              <text x="118" y="18" fill="#ef4444" fontSize="7.5" fontFamily="monospace" fontWeight="bold">DOMAIN AGE</text>
+              <text x="118" y="34" fill="#f2f4f3" fontSize="8" fontFamily="monospace">2 Days Old</text>
+
+              <rect x="220" y="0" width="100" height="50" rx="4" fill="#0d110f" stroke="rgba(245,158,11,0.4)" />
+              <text x="228" y="18" fill="#f59e0b" fontSize="7.5" fontFamily="monospace" fontWeight="bold">ENTROPY</text>
+              <text x="228" y="34" fill="#f2f4f3" fontSize="8" fontFamily="monospace">4.82 bits</text>
+            </g>
+          </g>
+
+          {/* Assessment Score */}
+          <g transform="translate(20, 115)">
+            <rect x="0" y="0" width="320" height="72" rx="4" fill="#111413" stroke="rgba(239,68,68,0.3)" />
+            <text x="12" y="18" fill="#ef4444" fontSize="9.5" fontFamily="monospace" fontWeight="bold">
+              THREAT LEVEL: 98/100 (HIGH RISK PHISHING)
+            </text>
+            <rect x="12" y="28" width="296" height="10" rx="5" fill="#1f2420" />
+            <rect x="12" y="28" width="280" height="10" rx="5" fill="#ef4444" />
+            <text x="12" y="54" fill="#8a928f" fontSize="8" fontFamily="monospace">
+              Random Forest + GBDT Ensemble · Scan Latency &lt; 120ms · 97.2% Acc
             </text>
           </g>
         </svg>

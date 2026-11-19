@@ -7,16 +7,16 @@ interface FloatingGitHubCardProps {
 
 export const FloatingGitHubCard: React.FC<FloatingGitHubCardProps> = ({ className = '' }) => {
   const repo = {
-    name: 'Indian-Sign-Language-Recognition',
+    name: 'Quantum-Hybrid-Explainable-Deepfake-Detection',
     owner: 'swapnil3104',
     branch: 'main',
     visibility: 'Public',
-    category: 'Featured Repo',
-    diff: '+212 -1,048 · 60 FPS verified',
+    category: 'Research Repo',
+    diff: 'Pennylane Quantum Circuit · ResNet + Grad-CAM',
     description:
-      'Real-time Indian Sign Language gesture recognition with MediaPipe landmark tracking, sentence synthesis, and interactive learning.',
-    tags: ['Python', 'TensorFlow', 'MediaPipe', 'OpenCV', 'Flask'],
-    url: 'https://github.com/swapnil3104/Indian-Sign-Language-Recognition',
+      'Quantum-classical hybrid deepfake detection combining PennyLane variational circuits with classical transfer learning and Grad-CAM explainability.',
+    tags: ['Python', 'PennyLane', 'PyTorch', 'Qiskit', 'Grad-CAM', 'OpenCV'],
+    url: 'https://github.com/swapnil3104/Quantum-Hybrid-Explainable-Deepfake-Detection',
   };
 
   return (

@@ -41,7 +41,7 @@ export const HomePage: React.FC = () => {
                 <span>Editorial Case Studies</span>
               </div>
               <h3 className="font-display font-bold text-xl sm:text-2xl text-white">
-                Explore all 28 projects with before → after metric diffs
+                Explore all 31+ projects with before → after metric diffs
               </h3>
               <p className="text-sm font-sans text-[#8a928f] max-w-xl">
                 Browse our dedicated editorial Work directory featuring live performance benchmarks, side-by-side metric transformations, and category filters for AI/ML, commercial client builds, and UI/UX prototypes.

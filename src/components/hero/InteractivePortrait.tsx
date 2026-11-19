@@ -18,7 +18,7 @@ interface Particle {
   life: number;
 }
 
-const GLYPHS = ['0', '1', 'λ', '∇', 'θ', 'Σ', 'f(x)', 'cv', 'py', 'ai', 'ISLR', '99.4%', 'tensor', 'ReLU'];
+const GLYPHS = ['0', '1', 'λ', '∇', 'θ', 'Σ', 'f(x)', 'cv', 'py', 'ai', 'Q-AI', 'pennylane', 'tensor', 'ReLU'];
 const COLORS = [
   '#c6ff00', // Soren Hale Cyber Lime
   '#d4ff00', // Bright Chartreuse
@@ -30,7 +30,7 @@ const CODE_LINES = [
   'import torch',
   'import cv2',
   'import mediapipe as mp',
-  'class ISLRNet(nn.Module):',
+  'class QuantumHybridNet(nn.Module):',
   '  def __init__(self):',
   '    super().__init__()',
   '    self.lstm = nn.LSTM(126, 64)',
@@ -279,7 +279,7 @@ export const InteractivePortrait: React.FC = () => {
     const resizeObserver = new ResizeObserver(updateSize);
     resizeObserver.observe(container);
 
-    const chars = '01λ∇θΣf(x)yolo=18msISLRcv2.torch+−=><{}[]';
+    const chars = '01λ∇θΣf(x)yolo=18msQ-AIcv2.torch+−=><{}[]';
 
     const drawMatrix = () => {
       ctx.fillStyle = 'rgba(8, 10, 9, 0.18)';

@@ -12,30 +12,30 @@ const ProjectModal = React.lazy(() => import('./ProjectModal'));
 
 const FEATURED_REPOS: FeaturedRepoData[] = [
   {
-    id: 'isl-recognition',
-    name: 'Indian-Sign-Language-Recognition',
+    id: 'quantum-deepfake-detection',
+    name: 'Quantum-Hybrid-Explainable-Deepfake-Detection',
     owner: 'swapnil3104',
     branch: 'main',
     visibility: 'Public',
-    category: 'Featured Repo',
-    diff: '+212 -1,048 · 60 FPS verified',
+    category: 'Featured Research Repo',
+    diff: 'Hybrid Quantum Circuit · PennyLane + ResNet',
     description:
-      'Real-time Indian Sign Language gesture recognition with MediaPipe landmark tracking, sentence synthesis, and interactive learning.',
-    tags: ['Python', 'TensorFlow', 'MediaPipe', 'OpenCV', 'Flask'],
-    url: 'https://github.com/swapnil3104/Indian-Sign-Language-Recognition',
+      'Detecting synthetic deepfakes via PennyLane quantum variational circuits, classical transfer learning, and Grad-CAM interpretability heatmaps.',
+    tags: ['Python', 'PennyLane', 'PyTorch', 'Qiskit', 'Grad-CAM', 'OpenCV'],
+    url: 'https://github.com/swapnil3104/Quantum-Hybrid-Explainable-Deepfake-Detection',
   },
   {
-    id: 'self-care-ai',
-    name: 'Self-Care-AI',
+    id: 'face-attendance',
+    name: 'Face-Recognition-Attendance-Management-System',
     owner: 'swapnil3104',
     branch: 'main',
     visibility: 'Public',
-    category: 'Featured Repo',
-    diff: '+340 -820 · 92.3% validation',
+    category: 'Featured System Repo',
+    diff: 'Multi-Role Admin & Lecturer · Excel Export',
     description:
-      'AI-assisted medical imaging tool for preliminary eye health screening and symptom self-triage with Grad-CAM explainability.',
-    tags: ['Python', 'PyTorch', 'FastAPI', 'TorchVision', 'Docker'],
-    url: 'https://github.com/swapnil3104/Self-Care-AI',
+      'Full-stack biometric attendance management platform integrating Python OpenCV facial recognition, PHP backend, and MySQL database.',
+    tags: ['PHP', 'Python', 'OpenCV', 'Face API', 'MySQL', 'JavaScript'],
+    url: 'https://github.com/swapnil3104/Face-Recognition-Attendance-Management-System',
   },
 ];
 
@@ -152,7 +152,7 @@ export const WorkSection: React.FC = () => {
         </div>
         <div className="flex flex-wrap items-center gap-2">
           <span className="px-3 py-1 rounded-full bg-[#c6ff00]/15 text-[#c6ff00] border border-[#c6ff00]/30 font-semibold">
-            01 AI/ML &amp; Engineering (12 Repos)
+            01 AI/ML &amp; Engineering ({projectsGitHub.length} Repos)
           </span>
           <a
             href="/consultant"
@@ -179,7 +179,7 @@ export const WorkSection: React.FC = () => {
         </div>
       </div>
 
-      {/* Featured GitHub Repository Telemetry Spotlight (ISLR & Self-Care AI) */}
+      {/* Featured GitHub Repository Telemetry Spotlight (Quantum Deepfake & Face Attendance) */}
       <div className="mb-12">
         <div className="flex items-center justify-between mb-4">
           <span className="text-xs font-mono text-[#c6ff00] uppercase tracking-wider flex items-center gap-2 font-semibold">
@@ -187,7 +187,7 @@ export const WorkSection: React.FC = () => {
             Featured Repository Telemetry &middot; Live Production Repos
           </span>
           <span className="text-xs font-mono text-[#8a928f]">
-            ISLR Studio &amp; Self-Care AI
+            Quantum Deepfake &amp; Face Attendance
           </span>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -389,6 +389,47 @@ export const WorkSection: React.FC = () => {
           </div>
         </div>
       )}
+
+      {/* Prominent "Visit My GitHub for More" Banner */}
+      <div className="mt-12 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-[#111613] via-[#141a16] to-[#0c100e] border border-white/10 hover:border-[#c6ff00]/40 p-6 sm:p-8 md:p-10 transition-all duration-300 relative overflow-hidden group shadow-2xl">
+        {/* Ambient neon glow */}
+        <div className="absolute top-0 right-0 w-80 h-80 bg-[#c6ff00]/5 rounded-full blur-3xl pointer-events-none group-hover:bg-[#c6ff00]/10 transition-colors" />
+        <div className="absolute -bottom-10 -left-10 w-60 h-60 bg-emerald-500/5 rounded-full blur-2xl pointer-events-none" />
+
+        <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div className="space-y-2 max-w-2xl">
+            <div className="flex items-center gap-2 font-mono text-xs text-[#c6ff00]">
+              <GitHubIcon size={16} className="text-[#c6ff00]" />
+              <span className="font-semibold">// GITHUB ECOSYSTEM &amp; CODE ARCHIVES</span>
+              <span className="text-[#8a928f]">·</span>
+              <span className="px-2 py-0.5 rounded-full bg-[#c6ff00]/10 border border-[#c6ff00]/25 text-[10px] font-bold">
+                {projectsGitHub.length}+ REPOSITORIES
+              </span>
+            </div>
+
+            <h3 className="font-display font-bold text-2xl sm:text-3xl text-white tracking-tight">
+              Visit my GitHub for more projects &amp; experiments
+            </h3>
+
+            <p className="text-xs sm:text-sm text-[#8a928f] leading-relaxed">
+              Explore open-source models, interactive notebooks, computer vision prototypes, utility scripts, and ongoing research repositories at <span className="text-white font-mono font-medium">@swapnil3104</span>.
+            </p>
+          </div>
+
+          <div className="flex-shrink-0">
+            <a
+              href="https://github.com/swapnil3104"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group/btn inline-flex items-center gap-3 px-6 py-3.5 rounded-full bg-[#c6ff00] hover:bg-[#d4ff00] text-black font-semibold text-xs sm:text-sm font-mono tracking-tight transition-all duration-200 shadow-[0_0_24px_rgba(198,255,0,0.25)] hover:shadow-[0_0_32px_rgba(198,255,0,0.45)] hover:-translate-y-0.5"
+            >
+              <GitHubIcon size={18} className="text-black" />
+              <span>Visit My GitHub for More</span>
+              <ExternalLinkIcon size={14} className="group-hover/btn:translate-x-0.5 transition-transform" />
+            </a>
+          </div>
+        </div>
+      </div>
 
       {/* TASK-305: Expandable Project Case Study Modal / Drawer */}
       {isModalOpen && (
